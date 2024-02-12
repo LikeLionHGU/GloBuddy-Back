@@ -4,6 +4,7 @@ import com.likelion.GloBuddyBackend.domain.Member;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -26,6 +27,12 @@ public class MemberService {
         return members.stream().map(MemberDto::of).toList();
     }
 
+    public MemberDto getMember(Long memberId){
+        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        return MemberDto.of(member);
+    }
+
+    @Transactional
     public void editMember(MemberDto dto, Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
         member.update(dto);

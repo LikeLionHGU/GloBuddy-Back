@@ -3,8 +3,10 @@ package com.likelion.GloBuddyBackend.controller;
 import com.likelion.GloBuddyBackend.controller.request.MemberRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.controller.response.Member.MemberListResponse;
+import com.likelion.GloBuddyBackend.controller.response.Member.MemberResponse;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.service.MemberService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,42 +19,47 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberService memberService;
+  private final MemberService memberService;
 
-    @PostMapping
-    public ResponseEntity<ApiResponse> addMember(@RequestBody MemberRequest request) {
-        MemberDto dto = MemberDto.of(request);
-        Long memberId = memberService.addMember(dto);
-        URI uri = URI.create("/members/" + memberId);
+  @PostMapping
+  public ResponseEntity<ApiResponse> addMember(@RequestBody MemberRequest request) {
+    MemberDto dto = MemberDto.of(request);
+    Long memberId = memberService.addMember(dto);
+    URI uri = URI.create("/member/" + memberId);
 
-        return ResponseEntity.created(uri).build();
-    }
+    return ResponseEntity.created(uri).build();
+  }
 
-    @GetMapping
-    public ResponseEntity<MemberListResponse> getAllMembers() {
-        List<MemberDto> members = memberService.getAllMembers();
-        MemberListResponse response = new MemberListResponse(members);
+  @GetMapping
+  public ResponseEntity<MemberListResponse> getAllMembers() {
+    List<MemberDto> members = memberService.getAllMembers();
+    MemberListResponse response = new MemberListResponse(members);
 
-        return ResponseEntity.ok(response);
-    }
+    return ResponseEntity.ok(response);
+  }
 
+  @GetMapping("/{memberId}")
+  public ResponseEntity<MemberResponse> getMember(@PathVariable Long memberId) {
 
-    @PutMapping("/{memberId}")
-    public ResponseEntity<Void> editMember(@PathVariable Long memberId, @RequestBody MemberRequest request){
+    MemberResponse response = new MemberResponse(memberService.getMember(memberId));
+
+    return ResponseEntity.ok(response);
+  }
+
+  @PatchMapping("/{memberId}")
+  public ResponseEntity<Void> editMember(
+      @PathVariable Long memberId, @RequestBody MemberRequest request) {
 
     MemberDto dto = MemberDto.of(request);
-    memberService.editMember(dto,memberId);
+    memberService.editMember(dto, memberId);
 
     return ResponseEntity.ok().build();
-    }
+  }
 
-    @DeleteMapping("/{memberId}")
-    public ResponseEntity<Void> deleteMember(@PathVariable Long memberId) {
-        memberService.delete(memberId);
+  @DeleteMapping("/{memberId}")
+  public ResponseEntity<Void> deleteMember(@PathVariable Long memberId) {
+    memberService.delete(memberId);
 
-        return ResponseEntity.ok().build();
-    }
-
-
+    return ResponseEntity.ok().build();
+  }
 }
-
