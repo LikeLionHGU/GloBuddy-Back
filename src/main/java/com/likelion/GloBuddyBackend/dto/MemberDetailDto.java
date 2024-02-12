@@ -1,5 +1,7 @@
 package com.likelion.GloBuddyBackend.dto;
 
+import com.likelion.GloBuddyBackend.controller.request.MemberDetailRequest;
+import com.likelion.GloBuddyBackend.controller.request.MemberRequest;
 import com.likelion.GloBuddyBackend.domain.MemberDetail;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +24,14 @@ public class MemberDetailDto {
                 .gender(memberDetail.getGender())
                 .nation(memberDetail.getNation())
                 .numNotification(memberDetail.getNumNotification())
+                .build();
+    }
+
+    public static  MemberDetailDto of(MemberDetailRequest memberDetailRequest){
+        return MemberDetailDto.builder()
+                .gender(memberDetailRequest.getGender())
+                .nation(memberDetailRequest.getNation())
+                .numNotification(memberDetailRequest.getNumNotification())
                 .build();
     }
 }
