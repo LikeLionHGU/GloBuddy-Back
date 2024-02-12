@@ -3,7 +3,6 @@ package com.likelion.GloBuddyBackend.controller;
 import com.likelion.GloBuddyBackend.controller.request.MemberRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.controller.response.Member.MemberListResponse;
-import com.likelion.GloBuddyBackend.controller.response.Member.MemberResponse;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.service.MemberService;
 import lombok.RequiredArgsConstructor;
