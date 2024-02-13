@@ -1,7 +1,9 @@
 package com.likelion.GloBuddyBackend.service;
 
+import com.likelion.GloBuddyBackend.domain.Member;
 import com.likelion.GloBuddyBackend.domain.MemberDetail;
 import com.likelion.GloBuddyBackend.dto.MemberDetailDto;
+import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
 import com.likelion.GloBuddyBackend.repository.MemberDetailRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +25,12 @@ public class MemberDetailService {
         return saved.getMemberDetailId();
     }
 
-    public List<MemberDetailDto> getAllMemberDetails() {
-        List<MemberDetail> memberDetails = memberDetailRepository.findAll();
+    public List<MemberDetailDto> getMemberDetails(Long memberId) {
+
+        List <MemberDetail> memberDetails = memberDetailRepository.findAllByMember(memberId);
         return memberDetails.stream().map(MemberDetailDto::of).toList();
     }
+
 
     public void editMemberDetail(MemberDetailDto dto, Long memberDetailId) {
         MemberDetail memberDetail = memberDetailRepository.findById(memberDetailId).orElseThrow(MemberNotFoundException::new);

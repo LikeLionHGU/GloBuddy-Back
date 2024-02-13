@@ -14,33 +14,30 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberDetail {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long memberDetailId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberDetailId;
+  private String gender;
+  private String nation;
+  private int numNotification;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "member_id")
+  private Member member;
 
-    private String gender;
-    private String nation;
-    private int numNotification;
+  public static MemberDetail create(MemberDetailDto dto) {
+    return MemberDetail.builder()
+        .gender(dto.getGender())
+        .nation(dto.getNation())
+        .numNotification(dto.getNumNotification())
+        .build();
+  }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-    public static MemberDetail create(MemberDetailDto dto){
-        return MemberDetail.builder()
-                .gender(dto.getGender())
-                .nation(dto.getNation())
-                .numNotification(dto.getNumNotification())
-                .build();
-
-    }
-
-    public void update(MemberDetailDto dto){
-        this.gender=dto.getGender();
-        this.nation=dto.getNation();
-        this.numNotification=dto.getNumNotification();
-    }
+  public void update(MemberDetailDto dto) {
+    this.gender = dto.getGender();
+    this.nation = dto.getNation();
+    this.numNotification = dto.getNumNotification();
+  }
 
 }

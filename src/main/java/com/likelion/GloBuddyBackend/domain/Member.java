@@ -25,21 +25,21 @@ public class Member {
 
     private String email;
 
-    private String image;
+    private String picture;
 
 
     public static Member create(MemberDto dto){
         return Member.builder()
                 .name(dto.getName())
                 .email(dto.getEmail())
-                .image(dto.getImage())
+                .picture(dto.getPicture())
                 .build();
     }
 
     public void update(MemberDto dto){
         this.name=dto.getName();
         this.email=dto.getEmail();
-        this.image=dto.getImage();
+        this.picture =dto.getPicture();
     }
 
 

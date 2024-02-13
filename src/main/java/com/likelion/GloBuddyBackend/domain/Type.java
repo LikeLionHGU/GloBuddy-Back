@@ -21,6 +21,4 @@ public class Type {
     private MemberDetail memberDetail;
 
 
-
-
 }

@@ -23,6 +23,6 @@ public class MemberResponse extends ApiResponse {
       this.memberId = dto.getMemberId();
       this.name = dto.getName();
       this.email = dto.getEmail();
-      this.image = dto.getImage();
+      this.image = dto.getPicture();
   }
 }
