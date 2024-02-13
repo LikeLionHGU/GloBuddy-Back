@@ -32,7 +32,7 @@ public class MemberDto {
         return MemberDto.builder()
                 .name(memberRequest.getName())
                 .email(memberRequest.getEmail())
-                .picture(memberRequest.getImage())
+                .picture(memberRequest.getPicture())
                 .build();
 
     }

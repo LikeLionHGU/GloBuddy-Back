@@ -12,6 +12,6 @@ public class MemberRequest {
 
     private String email;
 
-    private String image;
+    private String picture;
 
 }
