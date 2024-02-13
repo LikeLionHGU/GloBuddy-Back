@@ -1,6 +1,5 @@
 package com.likelion.GloBuddyBackend.dto;
 
-import com.likelion.GloBuddyBackend.domain.Needs;
 import lombok.Builder;
 import lombok.Getter;
 

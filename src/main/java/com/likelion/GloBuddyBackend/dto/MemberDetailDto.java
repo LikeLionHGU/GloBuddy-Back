@@ -10,12 +10,15 @@ import lombok.Getter;
 @Builder
 public class MemberDetailDto {
 
+    private Long memberId;
     private Long memberDetailId;
 
 
     private String gender;
     private String nation;
     private int numNotification;
+    private String needs;
+    private String type;
 
 
     public static MemberDetailDto of(MemberDetail memberDetail){
@@ -31,7 +34,6 @@ public class MemberDetailDto {
         return MemberDetailDto.builder()
                 .gender(memberDetailRequest.getGender())
                 .nation(memberDetailRequest.getNation())
-                .numNotification(memberDetailRequest.getNumNotification())
                 .build();
     }
 }

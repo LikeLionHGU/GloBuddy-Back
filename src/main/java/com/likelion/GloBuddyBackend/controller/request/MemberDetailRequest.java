@@ -1,5 +1,6 @@
 package com.likelion.GloBuddyBackend.controller.request;
 
+import com.likelion.GloBuddyBackend.domain.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,10 @@ public class MemberDetailRequest {
 
     private String gender;
     private String nation;
-    private int numNotification;
-    private List<String> type;
-    private List<String> needs;
+
+    private String type;
+    private String needs;
+
+
 
 }
