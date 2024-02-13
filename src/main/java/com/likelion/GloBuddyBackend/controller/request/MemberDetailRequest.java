@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberDetailRequest {
 
+    private Long memberId;
     private String gender;
     private String nation;
 

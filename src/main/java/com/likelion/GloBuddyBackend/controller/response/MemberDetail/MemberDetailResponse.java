@@ -11,23 +11,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemberDetailResponse extends ApiResponse {
 
-    private Long memberDetailId;
+  private Long memberDetailId;
+  private Long memberId;
 
-    private String gender;
-    private String nation;
+  private String gender;
+  private String nation;
 
-    private int numNotification;
-    private Type type;
-    private Needs needs;
+  private int numNotification;
+  private String type;
+  private String needs;
 
-    public MemberDetailResponse(MemberDetailDto dto){
-      this.memberDetailId=dto.getMemberDetailId();
-      this.gender=dto.getGender();
-      this.nation=dto.getNation();
-      this.numNotification=dto.getNumNotification();
-
-    }
-
-
-
+  public MemberDetailResponse(MemberDetailDto dto) {
+    this.memberDetailId = dto.getMemberDetailId();
+    this.memberId = dto.getMemberId();
+    this.gender = dto.getGender();
+    this.nation = dto.getNation();
+    this.numNotification = dto.getNumNotification();
+    this.needs = dto.getNeeds();
+    this.type = dto.getType();
+  }
 }

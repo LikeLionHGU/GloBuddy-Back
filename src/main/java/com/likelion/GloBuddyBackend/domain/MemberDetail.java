@@ -63,6 +63,7 @@ public class MemberDetail {
 
   public static MemberDetail toMemberDetail(MemberDetailDto memberDetailDto, Member member) {
     return MemberDetail.builder()
+            .member(member)
         .gender(memberDetailDto.getGender())
         .nation(memberDetailDto.getNation())
         .numNotification(memberDetailDto.getNumNotification())

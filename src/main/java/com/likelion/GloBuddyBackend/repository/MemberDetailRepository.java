@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface MemberDetailRepository extends JpaRepository<MemberDetail, Long> {
 
   @Query("select m from MemberDetail m where m.member.memberId= :memberId")
-  List<MemberDetail> findAllByMember(Long memberId);
+  MemberDetail findAllByMember(Long memberId);
 }

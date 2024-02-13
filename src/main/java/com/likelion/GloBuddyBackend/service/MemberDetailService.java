@@ -7,13 +7,14 @@ import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
 import com.likelion.GloBuddyBackend.repository.MemberDetailRepository;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.likelion.GloBuddyBackend.domain.MemberDetail.toMemberDetail;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,14 +34,15 @@ public class MemberDetailService {
 
     public MemberDetailDto getMemberDetails(Long memberId) {
 
-        MemberDetail memberDetail = memberDetailRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        MemberDetail memberDetail = memberDetailRepository.findAllByMember(memberId);
         return MemberDetailDto.of(memberDetail);
 
     }
 
 
+    @Transactional
     public void editMemberDetail(MemberDetailDto dto, Long memberId) {
-        MemberDetail memberDetail = memberDetailRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        MemberDetail memberDetail = memberDetailRepository.findAllByMember(memberId);
         memberDetail.update(dto);
     }
 
