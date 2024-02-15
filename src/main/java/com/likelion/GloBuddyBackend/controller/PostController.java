@@ -1,5 +1,6 @@
-package com.likelion.GloBuddyBackend.controller.response;
+package com.likelion.GloBuddyBackend.controller;
 
+import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.service.PostService;
 import com.likelion.GloBuddyBackend.controller.request.PostRequest;
 import lombok.RequiredArgsConstructor;

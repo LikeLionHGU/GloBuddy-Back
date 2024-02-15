@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    # mysql: com.mysql.cj.jdbc.Driver
+    # mariadb: org.mariadb.jdbc.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
+    # mysql: jdbc:mysql://localhost:3306/testdb
+    # mariadb: jdbc:mariadb://localhost:3306/testdb
+    url: jdbc:mariadb://localhost:3306/winter
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+
+cloud:
+  aws:
+    s3:
+      bucket: glob-min
+    credentials:
+      access-key: AKIA4DPEZFI7Y26G3LP6
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
