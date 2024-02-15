@@ -1,12 +1,15 @@
 package com.likelion.GloBuddyBackend.controller.response;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class ApiResponse {
+    private Boolean isSuccessful = true;
+
+    public ApiResponse(boolean isSuccessful) {
+        this.isSuccessful = isSuccessful;
+    }
 
 }
