@@ -1,5 +1,6 @@
 package com.likelion.GloBuddyBackend.domain;
 
+import com.likelion.GloBuddyBackend.dto.MemberDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -18,17 +19,25 @@ public class MatchingMember extends BaseTime{
     @ColumnDefault("0")
     private byte IfMatched;
 
-    private boolean IfCheched;
+    @ColumnDefault("false")
+    private boolean IfChecked;
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
     private Member member;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(name = "receiver_Id" , referencedColumnName = "member_id")
     private Post post;
 
-
-
+    public static MatchingMember of(Member sender, Post receiverPost){
+        return MatchingMember.builder()
+                .member(sender)
+                .post(receiverPost)
+                .build();
+    }
 
 }
