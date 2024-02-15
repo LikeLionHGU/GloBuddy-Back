@@ -15,3 +15,17 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+
+
+cloud:
+  aws:
+    s3:
+      bucket: glob-min
+    credentials:
+      access-key: AKIA4DPEZFI7Y26G3LP6
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
