@@ -1,12 +1,8 @@
 package com.likelion.GloBuddyBackend.domain;
 
 import com.likelion.GloBuddyBackend.dto.MemberDetailDto;
-import com.likelion.GloBuddyBackend.dto.MemberDto;
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -22,11 +18,9 @@ public class MemberDetail {
   private String gender;
   private String nation;
 
-  @ColumnDefault("0")
-  private int numNotification;
 
-  private String needs;
-  private String type;
+
+  private String mbti;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "member_id")
@@ -36,9 +30,7 @@ public class MemberDetail {
     return MemberDetail.builder()
         .gender(dto.getGender())
         .nation(dto.getNation())
-        .numNotification(dto.getNumNotification())
-        .needs(dto.getNeeds())
-        .type(dto.getType())
+        .mbti(dto.getMbti())
         .build();
   }
 
@@ -46,9 +38,7 @@ public class MemberDetail {
     return MemberDetail.builder()
         .gender(dto.getGender())
         .nation(dto.getNation())
-        .numNotification(dto.getNumNotification())
-        .needs(dto.getNeeds())
-        .type(dto.getType())
+        .mbti(dto.getMbti())
         .member(member)
         .build();
   }
@@ -56,9 +46,7 @@ public class MemberDetail {
   public void update(MemberDetailDto dto) {
     this.gender = dto.getGender();
     this.nation = dto.getNation();
-    this.numNotification = dto.getNumNotification();
-    this.needs=dto.getNeeds();
-    this.type=dto.getType();
+    this.mbti =dto.getMbti();
   }
 
   public static MemberDetail toMemberDetail(MemberDetailDto memberDetailDto, Member member) {
@@ -66,8 +54,6 @@ public class MemberDetail {
             .member(member)
         .gender(memberDetailDto.getGender())
         .nation(memberDetailDto.getNation())
-        .numNotification(memberDetailDto.getNumNotification())
-        .member(member)
         .build();
   }
 }

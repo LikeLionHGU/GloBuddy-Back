@@ -28,6 +28,6 @@ public class MemberDetailResponse extends ApiResponse {
     this.nation = dto.getNation();
     this.numNotification = dto.getNumNotification();
     this.needs = dto.getNeeds();
-    this.type = dto.getType();
+    this.type = dto.getMbti();
   }
 }

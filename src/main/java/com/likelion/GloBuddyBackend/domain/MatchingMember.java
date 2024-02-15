@@ -2,6 +2,7 @@ package com.likelion.GloBuddyBackend.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -14,17 +15,17 @@ public class MatchingMember extends BaseTime{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchingId;
 
-    private byte IfMatched; // 요청 받은 사람이 요청을 [ 미확인 / 수락 / 거절 ] 했는지 저장하는 용도
+    @ColumnDefault("0")
+    private byte IfMatched;
 
-    private boolean IfCheched; // 확인 용도
-
+    private boolean IfCheched;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "sender_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "receiver_id")
     private Post post;
 
 
