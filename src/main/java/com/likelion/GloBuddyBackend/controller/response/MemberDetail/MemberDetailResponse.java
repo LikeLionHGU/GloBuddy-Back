@@ -17,17 +17,13 @@ public class MemberDetailResponse extends ApiResponse {
   private String gender;
   private String nation;
 
-  private int numNotification;
-  private String type;
-  private String needs;
+  private String mbti;
 
   public MemberDetailResponse(MemberDetailDto dto) {
     this.memberDetailId = dto.getMemberDetailId();
     this.memberId = dto.getMemberId();
     this.gender = dto.getGender();
     this.nation = dto.getNation();
-    this.numNotification = dto.getNumNotification();
-    this.needs = dto.getNeeds();
-    this.type = dto.getMbti();
+    this.mbti = dto.getMbti();
   }
 }

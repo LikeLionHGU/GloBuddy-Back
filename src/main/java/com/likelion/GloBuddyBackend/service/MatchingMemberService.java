@@ -22,14 +22,13 @@ public class MatchingMemberService {
     private final PostRepository postRepository;
     private final MatchingMemberRepository matchingMemberRepository;
 
-    public Long createMatchingRequest(MemberDto memberDto, PostDto postDto) {
-        Long senderId = memberDto.getMemberId();
+    public Long createMatchingRequest(Long senderId, Long postId) {
+
         Member sender = memberRepository.findById(senderId).orElseThrow(MemberNotFoundException::new);
 
-        Long receiverId = postDto.getPostId();
-        Post receiverPostId = postRepository.findById(receiverId).orElseThrow(PostNotFoundException::new);
+        Post receiverPost = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
 
-        MatchingMember matchingMember = MatchingMember.of(sender, receiverPostId);
+        MatchingMember matchingMember = MatchingMember.of(sender, receiverPost);
         MatchingMember saved = matchingMemberRepository.save(matchingMember);
 
         return saved.getMatchingId();
