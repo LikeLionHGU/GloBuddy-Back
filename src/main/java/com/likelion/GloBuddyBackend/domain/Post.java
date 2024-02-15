@@ -33,4 +33,9 @@ public class Post extends BaseTime{
                 .build();
     }
 
+    public void update(PostDto postDto) {
+        this.title = postDto.getTitle();
+        this.content = postDto.getContent();
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.likelion.GloBuddyBackend.exception;
 
+
+
 public class
 MemberNotFoundException extends RuntimeException {
     public MemberNotFoundException() {

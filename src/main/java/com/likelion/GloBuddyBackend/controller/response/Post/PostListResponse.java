@@ -4,6 +4,7 @@ import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.dto.PostDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import com.likelion.GloBuddyBackend.domain.Post;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class PostListResponse extends ApiResponse  {
 
     private List<PostDto> posts;
 
-    public PostListResponse(List<PostDto> postDto, long count) {
+    public PostListResponse(List<PostDto> postDto) {
         this.posts = postDto;
     }
 

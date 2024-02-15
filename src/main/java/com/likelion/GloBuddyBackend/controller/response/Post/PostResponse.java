@@ -1,12 +1,13 @@
 package com.likelion.GloBuddyBackend.controller.response.Post;
 
+import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.dto.PostDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-public class PostResponse {
+public class PostResponse extends ApiResponse {
 
     private Long postId;
     private String title;
