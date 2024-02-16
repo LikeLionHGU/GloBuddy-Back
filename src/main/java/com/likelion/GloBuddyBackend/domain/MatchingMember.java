@@ -22,7 +22,8 @@ public class MatchingMember extends BaseTime{
     @ColumnDefault("false")
     private boolean IfChecked;
 
-
+    @Column(nullable = false)
+    private String chatLink;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
@@ -33,10 +34,11 @@ public class MatchingMember extends BaseTime{
     @JoinColumn(name = "receiver_Id" , referencedColumnName = "member_id")
     private Post post;
 
-    public static MatchingMember of(Member sender, Post receiverPost){
+    public static MatchingMember of(Member sender, Post receiverPost,String chatLink){
         return MatchingMember.builder()
                 .member(sender)
                 .post(receiverPost)
+                .chatLink(chatLink)
                 .build();
     }
 
