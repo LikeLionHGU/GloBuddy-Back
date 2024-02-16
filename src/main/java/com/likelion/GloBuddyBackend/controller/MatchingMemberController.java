@@ -26,6 +26,7 @@ public class MatchingMemberController {
 
         MatchingMember matchingMember = matchingService.createMatchingRequest(request.getMemberId(), receiverPostId, request.getChatLink());
 
+
         MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(matchingMember);
         ApiResponse response = new RequestMatchingResponse(matchingMemberDto);
 
@@ -34,7 +35,7 @@ public class MatchingMemberController {
 
 
     //    내가 받은 메일 가져오기
-    @GetMapping("/notification/receieve/{memberId}")
+    @GetMapping("/notification/receive/{memberId}")
     public ResponseEntity<ApiResponse> getReceiveMail(@PathVariable Long memberId) {
         List<MatchingMemberDto> matchingList = matchingService.getAllReceiveMail(memberId);
 

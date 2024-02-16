@@ -27,7 +27,6 @@ public class MatchingMemberDto {
         return MatchingMemberDto.builder()
                 .senderId(sender.getMemberId())
                 .receiverId(receiver.getMemberId())
-
                 .build();
     }
 

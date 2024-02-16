@@ -26,7 +26,6 @@ public class MatchingMember extends BaseTime{
     @Column(nullable = false)
     private String chatLink;
 
-    @Column(nullable = false)
     private String message;
 
     @ManyToOne(fetch = FetchType.LAZY)

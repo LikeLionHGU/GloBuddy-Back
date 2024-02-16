@@ -27,6 +27,7 @@ public class MemberController {
     Long memberId = memberService.addMember(dto);
     URI uri = URI.create("/member/" + memberId);
 
+
     return ResponseEntity.created(uri).build();
   }
 

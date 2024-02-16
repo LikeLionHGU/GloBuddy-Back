@@ -11,10 +11,11 @@ import java.util.List;
 public interface MatchingMemberRepository extends JpaRepository<MatchingMember, Long> {
 
     //    미확인인 거 가져오기 ( receiverid가 본인 id와 같고 && Ifmatched가 0인 것 )
-    @Query("select m from MatchingMember m where m.post.member =:receiver  and m.IfMatched = 0 ")
+    @Query("select m from MatchingMember m where m.member =:receiver and m.IfChecked = false ")
     List<MatchingMember> findAllByMemberIdAndIfNotMatched(Member receiver);
 
-    @Query("select m from MatchingMember m where m.member =:sender and m.IfChecked = false ")
+
+    @Query("select m from MatchingMember m where m.post.member =:sender  and m.IfMatched = 0 ")
     List<MatchingMember> findAllByMemberIdAndIfNotChecked(Member sender);
 
 
