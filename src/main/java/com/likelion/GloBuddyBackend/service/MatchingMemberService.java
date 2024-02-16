@@ -39,19 +39,16 @@ public class MatchingMemberService {
     }
 
 
-    public List<MatchingMember> getAllsentMail(Long memberId) {
+    public List<MatchingMemberDto> getAllsentMail(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
-
         List<MatchingMember> sentMail = matchingMemberRepository.findAllByMemberIdAndIfNotMatched(member);
-
-        return sentMail;
+        return sentMail.stream().map(MatchingMemberDto::of).toList();
     }
 
-    public List<MatchingMember> getAllReceiveMail(Long memberId) {
+    public List<MatchingMemberDto> getAllReceiveMail(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
         List<MatchingMember> receiveMail = matchingMemberRepository.findAllByMemberIdAndIfNotChecked(member);
-
-        return receiveMail;
+        return receiveMail.stream().map(MatchingMemberDto::of).toList();
     }
 
 

@@ -1,5 +1,6 @@
 package com.likelion.GloBuddyBackend.domain;
 
+import com.likelion.GloBuddyBackend.dto.MatchingMemberDto;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,9 @@ public class MatchingMember extends BaseTime{
     @Column(nullable = false)
     private String chatLink;
 
+    @Column(nullable = false)
+    private String message;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
     private Member member;
@@ -40,6 +44,18 @@ public class MatchingMember extends BaseTime{
                 .post(receiverPost)
                 .chatLink(chatLink)
                 .build();
+    }
+
+    public static MatchingMember of(MatchingMemberDto dto,Member member){
+        return MatchingMember.builder()
+                .matchingId(dto.getMatchingId())
+                .IfMatched(dto.getIfMatched())
+                .IfChecked(dto.isIfChecked())
+                .chatLink(dto.getChatLink())
+                .message(dto.getMessage())
+                .member(member)
+                .build();
+
     }
 
 }

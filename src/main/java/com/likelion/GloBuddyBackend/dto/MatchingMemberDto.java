@@ -19,6 +19,7 @@ public class MatchingMemberDto {
 
     private boolean ifChecked;
     private String chatLink;
+    private String message;
 
 
     public static MatchingMemberDto of(Member sender, Member receiver) {
@@ -30,15 +31,16 @@ public class MatchingMemberDto {
                 .build();
     }
 
-    public static MatchingMemberDto of(MatchingRequest matchingRequest){
+    public static MatchingMemberDto of(MatchingRequest matchingRequest) {
 
         return MatchingMemberDto.builder()
                 .senderId(matchingRequest.getMemberId())
                 .chatLink(matchingRequest.getChatLink())
+                .message(matchingRequest.getMessage())
                 .build();
     }
 
-    public static MatchingMemberDto of(MatchingMember matchingMember){
+    public static MatchingMemberDto of(MatchingMember matchingMember) {
 
         return MatchingMemberDto.builder()
                 .matchingId(matchingMember.getMatchingId())
@@ -47,6 +49,9 @@ public class MatchingMemberDto {
                 .ifMatched(matchingMember.getIfMatched())
                 .ifChecked(matchingMember.isIfChecked())
                 .chatLink(matchingMember.getChatLink())
+                .message(matchingMember.getMessage())
                 .build();
     }
+
+
 }
