@@ -1,18 +1,14 @@
 package com.likelion.GloBuddyBackend.controller.response.Matching;
 
-import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.dto.MatchingMemberDto;
-import com.likelion.GloBuddyBackend.dto.MemberDto;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class RequestMatchingResponse extends ApiResponse {
+public class ReceiveMailResponse {
 
     private Long matchingId ;
 
@@ -24,10 +20,12 @@ public class RequestMatchingResponse extends ApiResponse {
     private boolean IfChecked;
 
     private String chatLink;
+
     private String message;
 
 
-    public RequestMatchingResponse(MatchingMemberDto dto){
+
+    public ReceiveMailResponse(MatchingMemberDto dto){
         this.matchingId= dto.getMatchingId();
         this.senderId = dto.getSenderId();
         this.receiverId =dto.getReceiverId();
@@ -36,4 +34,5 @@ public class RequestMatchingResponse extends ApiResponse {
         this.chatLink = dto.getChatLink();
         this.message = dto.getMessage();
     }
+
 }
