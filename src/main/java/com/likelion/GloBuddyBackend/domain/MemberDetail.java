@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberDetail {
+public class MemberDetail extends BaseTime {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -37,11 +37,12 @@ public class MatchingMember extends BaseTime{
     @JoinColumn(name = "receiver_Id" , referencedColumnName = "member_id")
     private Post post;
 
-    public static MatchingMember of(Member sender, Post receiverPost,String chatLink){
+    public static MatchingMember of(Member sender, Post receiverPost,String chatLink, String message){
         return MatchingMember.builder()
                 .member(sender)
                 .post(receiverPost)
                 .chatLink(chatLink)
+                .message(message)
                 .build();
     }
 
