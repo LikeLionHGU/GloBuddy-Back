@@ -80,6 +80,8 @@ public class MatchingMemberService {
     public void checkMatching(Long matchingId) {
         MatchingMember matchingMember = matchingMemberRepository.findById(matchingId).orElseThrow(MatchingNotFountException::new);
         matchingMember.setIfChecked(true);
+        matchingMember.update(MatchingMemberDto.of(matchingMember));
+
     }
 
 }

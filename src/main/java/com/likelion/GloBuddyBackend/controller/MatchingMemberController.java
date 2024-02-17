@@ -1,7 +1,6 @@
 package com.likelion.GloBuddyBackend.controller;
 
 import com.likelion.GloBuddyBackend.controller.request.MatchingChoiceRequest;
-import com.likelion.GloBuddyBackend.controller.request.MatchingCheckedRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.MailNumResponse;
@@ -51,7 +50,7 @@ public class MatchingMemberController {
     }
 
     @PatchMapping("/notification/sent/{memberId}/check/{matchingId}")
-    public String checkMatching(@PathVariable Long memberId, @PathVariable Long matchingId ,  @RequestBody MatchingCheckedRequest request) {
+    public String checkMatching(@PathVariable Long memberId, @PathVariable Long matchingId ) {
 
         matchingService.checkMatching(matchingId);
 
