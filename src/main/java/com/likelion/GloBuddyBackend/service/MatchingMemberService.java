@@ -72,13 +72,14 @@ public class MatchingMemberService {
     @Transactional
     public void choiceMatching(MatchingMemberDto dto, Long matchingId) {
         MatchingMember matchingMember = matchingMemberRepository.findById(matchingId).orElseThrow(MatchingNotFountException::new);
-        matchingMember.choice(dto);
+        matchingMember.setIfMatched(dto.getIfMatched());
+        matchingMember.update(MatchingMemberDto.of(matchingMember));
     }
 
     @Transactional
-    public void checkMatching(MatchingMemberDto dto, Long matchingId) {
+    public void checkMatching(Long matchingId) {
         MatchingMember matchingMember = matchingMemberRepository.findById(matchingId).orElseThrow(MatchingNotFountException::new);
-        matchingMember.checking(dto);
+        matchingMember.setIfChecked(true);
     }
 
 }

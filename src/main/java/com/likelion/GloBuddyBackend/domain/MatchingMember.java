@@ -8,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -58,13 +59,17 @@ public class MatchingMember extends BaseTime{
 
     }
 
-    public void choice(MatchingMemberDto dto){
+    public void update(MatchingMemberDto dto){
+
+        this.matchingId=dto.getMatchingId();
+        this.IfChecked = dto.isIfChecked();
+        this.chatLink = dto.getChatLink();
         this.IfMatched = dto.getIfMatched();
+        this.message = dto.getMessage();
+
     }
 
-    public void checking(MatchingMemberDto dto){
-        this.IfChecked = dto.isIfChecked();
-    }
+
 
 
 }

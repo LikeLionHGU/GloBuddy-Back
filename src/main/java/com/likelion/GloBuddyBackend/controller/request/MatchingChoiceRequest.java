@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MatchingChoiceRequest {
 
-    private Long matchingId;
-    private byte IfMatched;
+    private byte ifMatched;
 }

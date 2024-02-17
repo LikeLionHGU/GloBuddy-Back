@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MatchingReadRequest {
-    private Long matchingId;
-    private Boolean IfChecked;
+public class MatchingCheckedRequest {
+
+    private Boolean ifChecked;
+
 }

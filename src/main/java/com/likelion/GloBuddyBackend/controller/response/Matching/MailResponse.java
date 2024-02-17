@@ -24,7 +24,6 @@ public class MailResponse extends ApiResponse {
 
     private String message;
 
-    private Long num;
 
     public MailResponse(MatchingMemberDto dto){
         this.matchingId= dto.getMatchingId();
@@ -34,7 +33,6 @@ public class MailResponse extends ApiResponse {
         this.IfMatched = dto.getIfMatched();
         this.chatLink = dto.getChatLink();
         this.message = dto.getMessage();
-        this.num = dto.getNum();
     }
 
 }

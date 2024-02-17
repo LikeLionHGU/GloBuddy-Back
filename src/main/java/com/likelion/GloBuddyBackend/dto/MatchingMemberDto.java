@@ -1,5 +1,6 @@
 package com.likelion.GloBuddyBackend.dto;
 
+import com.likelion.GloBuddyBackend.controller.request.MatchingCheckedRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingChoiceRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
 import com.likelion.GloBuddyBackend.controller.request.MemberDetailRequest;
@@ -21,7 +22,7 @@ public class MatchingMemberDto {
     private boolean ifChecked;
     private String chatLink;
     private String message;
-    private Long num;
+
 
 
     public static MatchingMemberDto of(Member sender, Member receiver) {
@@ -31,6 +32,8 @@ public class MatchingMemberDto {
                 .receiverId(receiver.getMemberId())
                 .build();
     }
+
+
 
     public static MatchingMemberDto of(MatchingRequest matchingRequest) {
 
@@ -44,7 +47,16 @@ public class MatchingMemberDto {
     public static MatchingMemberDto of(MatchingChoiceRequest matchingChoiceRequest) {
 
         return MatchingMemberDto.builder()
+
                 .ifMatched(matchingChoiceRequest.getIfMatched())
+                .build();
+    }
+
+    public static MatchingMemberDto of(MatchingCheckedRequest matchingCheckedRequest) {
+
+        return MatchingMemberDto.builder()
+
+                .ifChecked(matchingCheckedRequest.getIfChecked())
                 .build();
     }
 

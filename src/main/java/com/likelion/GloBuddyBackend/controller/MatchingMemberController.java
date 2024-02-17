@@ -1,8 +1,8 @@
 package com.likelion.GloBuddyBackend.controller;
 
 import com.likelion.GloBuddyBackend.controller.request.MatchingChoiceRequest;
+import com.likelion.GloBuddyBackend.controller.request.MatchingCheckedRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
-import com.likelion.GloBuddyBackend.controller.request.MemberRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.MailNumResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.MailListResponse;
@@ -43,21 +43,20 @@ public class MatchingMemberController {
     @PatchMapping("/notification/receive/{memberId}/choice/{matchingId}")
     public ResponseEntity<ApiResponse> choiceMatching(@PathVariable Long memberId, @PathVariable Long matchingId ,  @RequestBody MatchingChoiceRequest request) {
         MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(request);
-        matchingService.choiceMatching(matchingMemberDto,matchingId);
+        matchingService.choiceMatching(matchingMemberDto, matchingId);
 
         ApiResponse response = new MailResponse(matchingMemberDto);
 
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/notification/receive/{memberId}/check/{matchingId}")
-    public ResponseEntity<ApiResponse> checkMatching(@PathVariable Long memberId, @PathVariable Long matchingId ,  @RequestBody MatchingChoiceRequest request) {
-        MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(request);
-        matchingService.choiceMatching(matchingMemberDto,matchingId);
+    @PatchMapping("/notification/sent/{memberId}/check/{matchingId}")
+    public String checkMatching(@PathVariable Long memberId, @PathVariable Long matchingId ,  @RequestBody MatchingCheckedRequest request) {
 
-        ApiResponse response = new MailResponse(matchingMemberDto);
+        matchingService.checkMatching(matchingId);
 
-        return ResponseEntity.ok(response);
+
+        return "Checked";
     }
 
 
