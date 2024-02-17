@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ReceiveMailResponse {
+public class MailResponse {
 
     private Long matchingId ;
 
@@ -23,9 +23,9 @@ public class ReceiveMailResponse {
 
     private String message;
 
+    private Long num;
 
-
-    public ReceiveMailResponse(MatchingMemberDto dto){
+    public MailResponse(MatchingMemberDto dto){
         this.matchingId= dto.getMatchingId();
         this.senderId = dto.getSenderId();
         this.receiverId =dto.getReceiverId();
@@ -33,6 +33,7 @@ public class ReceiveMailResponse {
         this.IfMatched = dto.getIfMatched();
         this.chatLink = dto.getChatLink();
         this.message = dto.getMessage();
+        this.num = dto.getNum();
     }
 
 }

@@ -3,7 +3,7 @@ package com.likelion.GloBuddyBackend.controller;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.MailNumResponse;
-import com.likelion.GloBuddyBackend.controller.response.Matching.ReceiveMailListResponse;
+import com.likelion.GloBuddyBackend.controller.response.Matching.MailListResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.RequestMatchingResponse;
 import com.likelion.GloBuddyBackend.domain.MatchingMember;
 import com.likelion.GloBuddyBackend.dto.MatchingMemberDto;
@@ -25,7 +25,7 @@ public class MatchingMemberController {
     @PostMapping("/{receiverPostId}")
     public ResponseEntity<ApiResponse> requestMatching(@PathVariable Long receiverPostId, @RequestBody MatchingRequest request) {
 
-        MatchingMember matchingMember = matchingService.createMatchingRequest(request.getMemberId(), receiverPostId, request.getChatLink(),request.getMessage());
+        MatchingMember matchingMember = matchingService.createMatchingRequest(request.getMemberId(), receiverPostId, request.getChatLink(), request.getMessage());
 
 
         MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(matchingMember);
@@ -38,8 +38,9 @@ public class MatchingMemberController {
     @GetMapping("/notification/receive/{memberId}")
     public ResponseEntity<ApiResponse> getReceiveMail(@PathVariable Long memberId) {
         List<MatchingMemberDto> matchingList = matchingService.getAllReceiveMail(memberId);
+        Long numOfSentMail = matchingService.getNumOfSentMail(memberId);
 
-        ApiResponse response = new ReceiveMailListResponse(matchingList);
+        ApiResponse response = new MailListResponse(matchingList);
 
         return ResponseEntity.ok(response);
     }
@@ -49,15 +50,15 @@ public class MatchingMemberController {
     public ResponseEntity<ApiResponse> getSentMail(@PathVariable Long memberId) {
         List<MatchingMemberDto> matchingList = matchingService.getAllsentMail(memberId);
 
-        ApiResponse response = new ReceiveMailListResponse(matchingList);
+        ApiResponse response = new MailListResponse(matchingList);
 
         return ResponseEntity.ok(response);
     }
+
 //    수락/거절
 
 
 
-    //     알림 개수
     @GetMapping("/notification/sent/num/{memberId}")
     public ResponseEntity<ApiResponse> getNumOfSentMail(@PathVariable Long memberId) {
 
@@ -75,7 +76,6 @@ public class MatchingMemberController {
 
         return ResponseEntity.ok(response);
     }
-
 
 
 }

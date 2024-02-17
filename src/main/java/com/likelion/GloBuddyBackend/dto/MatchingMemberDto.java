@@ -20,6 +20,7 @@ public class MatchingMemberDto {
     private boolean ifChecked;
     private String chatLink;
     private String message;
+    private Long num;
 
 
     public static MatchingMemberDto of(Member sender, Member receiver) {

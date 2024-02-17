@@ -58,4 +58,13 @@ public class MatchingMember extends BaseTime{
 
     }
 
+    public void choice(MatchingMemberDto dto){
+        this.IfMatched = dto.getIfMatched();
+    }
+
+    public void checking(MatchingMemberDto dto){
+        this.IfChecked = dto.isIfChecked();
+    }
+
+
 }
