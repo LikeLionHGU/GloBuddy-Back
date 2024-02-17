@@ -1,9 +1,12 @@
 package com.likelion.GloBuddyBackend.controller;
 
+import com.likelion.GloBuddyBackend.controller.request.MatchingChoiceRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
+import com.likelion.GloBuddyBackend.controller.request.MemberRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.MailNumResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.MailListResponse;
+import com.likelion.GloBuddyBackend.controller.response.Matching.MailResponse;
 import com.likelion.GloBuddyBackend.controller.response.Matching.RequestMatchingResponse;
 import com.likelion.GloBuddyBackend.domain.MatchingMember;
 import com.likelion.GloBuddyBackend.dto.MatchingMemberDto;
@@ -35,6 +38,32 @@ public class MatchingMemberController {
     }
 
 
+
+
+    @PatchMapping("/notification/receive/{memberId}/choice/{matchingId}")
+    public ResponseEntity<ApiResponse> choiceMatching(@PathVariable Long memberId, @PathVariable Long matchingId ,  @RequestBody MatchingChoiceRequest request) {
+        MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(request);
+        matchingService.choiceMatching(matchingMemberDto,matchingId);
+
+        ApiResponse response = new MailResponse(matchingMemberDto);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/notification/receive/{memberId}/check/{matchingId}")
+    public ResponseEntity<ApiResponse> checkMatching(@PathVariable Long memberId, @PathVariable Long matchingId ,  @RequestBody MatchingChoiceRequest request) {
+        MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(request);
+        matchingService.choiceMatching(matchingMemberDto,matchingId);
+
+        ApiResponse response = new MailResponse(matchingMemberDto);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+
+
+
     @GetMapping("/notification/receive/{memberId}")
     public ResponseEntity<ApiResponse> getReceiveMail(@PathVariable Long memberId) {
         List<MatchingMemberDto> matchingList = matchingService.getAllReceiveMail(memberId);
@@ -55,8 +84,6 @@ public class MatchingMemberController {
         return ResponseEntity.ok(response);
     }
 
-//    수락/거절
-
 
 
     @GetMapping("/notification/sent/num/{memberId}")
@@ -76,6 +103,4 @@ public class MatchingMemberController {
 
         return ResponseEntity.ok(response);
     }
-
-
 }

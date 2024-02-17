@@ -1,5 +1,6 @@
 package com.likelion.GloBuddyBackend.dto;
 
+import com.likelion.GloBuddyBackend.controller.request.MatchingChoiceRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
 import com.likelion.GloBuddyBackend.controller.request.MemberDetailRequest;
 import com.likelion.GloBuddyBackend.domain.MatchingMember;
@@ -39,6 +40,15 @@ public class MatchingMemberDto {
                 .message(matchingRequest.getMessage())
                 .build();
     }
+
+    public static MatchingMemberDto of(MatchingChoiceRequest matchingChoiceRequest) {
+
+        return MatchingMemberDto.builder()
+                .ifMatched(matchingChoiceRequest.getIfMatched())
+                .build();
+    }
+
+
 
     public static MatchingMemberDto of(MatchingMember matchingMember) {
 
