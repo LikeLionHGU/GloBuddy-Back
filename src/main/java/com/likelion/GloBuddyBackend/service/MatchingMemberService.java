@@ -6,11 +6,13 @@ import com.likelion.GloBuddyBackend.domain.Post;
 import com.likelion.GloBuddyBackend.dto.MatchingMemberDto;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.dto.PostDto;
+import com.likelion.GloBuddyBackend.exception.MatchingNotFountException;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
 import com.likelion.GloBuddyBackend.exception.PostNotFoundException;
 import com.likelion.GloBuddyBackend.repository.MatchingMemberRepository;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import com.likelion.GloBuddyBackend.repository.PostRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +68,21 @@ public class MatchingMemberService {
         return sent;
     }
 
+
+    @Transactional
+    public void choiceMatching(MatchingMemberDto dto, Long matchingId) {
+        MatchingMember matchingMember = matchingMemberRepository.findById(matchingId).orElseThrow(MatchingNotFountException::new);
+        matchingMember.setIfMatched(dto.getIfMatched());
+        matchingMember.update(MatchingMemberDto.of(matchingMember));
+    }
+
+    @Transactional
+    public void checkMatching(Long matchingId) {
+        MatchingMember matchingMember = matchingMemberRepository.findById(matchingId).orElseThrow(MatchingNotFountException::new);
+        matchingMember.setIfChecked(true);
+        matchingMember.update(MatchingMemberDto.of(matchingMember));
+
+    }
 
 }
 

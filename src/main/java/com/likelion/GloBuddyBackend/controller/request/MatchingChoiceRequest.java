@@ -6,14 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberDetailRequest {
+public class MatchingChoiceRequest {
 
-    private Long memberId;
-    private String gender;
-    private String nation;
-    private String mbti;
-
-
-
-
+    private byte ifMatched;
 }
