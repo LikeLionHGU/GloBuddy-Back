@@ -51,6 +51,7 @@ public class MatchingMemberService {
         return sentMail.stream().map(MatchingMemberDto::of).toList();
     }
 
+
     public Long getNumOfReceiveMail(Long receiverId) {
         Member receiver = memberRepository.findById(receiverId).orElseThrow(MemberNotFoundException::new);
         Long received = matchingMemberRepository.getNumOfReceiveMail(receiver);
