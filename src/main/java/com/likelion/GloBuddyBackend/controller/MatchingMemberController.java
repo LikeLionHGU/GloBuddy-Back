@@ -65,7 +65,7 @@ public class MatchingMemberController {
     @GetMapping("/notification/receive/{memberId}")
     public ResponseEntity<ApiResponse> getReceiveMail(@PathVariable Long memberId) {
         List<MatchingMemberDto> matchingList = matchingService.getAllReceiveMail(memberId);
-        Long numOfSentMail = matchingService.getNumOfSentMail(memberId);
+
 
         ApiResponse response = new MailListResponse(matchingList);
 
