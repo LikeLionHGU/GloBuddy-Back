@@ -1,6 +1,7 @@
 package com.likelion.GloBuddyBackend.domain;
 
 import com.likelion.GloBuddyBackend.dto.MemberDto;
+import com.likelion.GloBuddyBackend.dto.MyInfoEditDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Member extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +44,7 @@ public class Member {
     }
 
 
-
-
-
+    public void nameUpdate(MyInfoEditDto dto) {
+        this.name = dto.getName();
+    }
 }

@@ -2,24 +2,19 @@ spring:
   datasource:
     # mysql: com.mysql.cj.jdbc.Driver
     # mariadb: org.mariadb.jdbc.Driver
-#    driver-class-name: org.mariadb.jdbc.Driver // 주석한 곳
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
     # mysql: jdbc:mysql://localhost:3306/testdb
     # mariadb: jdbc:mariadb://localhost:3306/testdb
-#    url: jdbc:mariadb://localhost:3306/winter  // 주석한 곳
-    url: jdbc:mysql://localhost:3306/GloB2
+    url: jdbc:mariadb://localhost:3306/winter
     username: root
     password: 1234
-
-
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
     show-sql: true
-
 
 cloud:
   aws:

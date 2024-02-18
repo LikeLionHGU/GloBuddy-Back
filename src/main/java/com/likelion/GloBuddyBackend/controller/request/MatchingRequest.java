@@ -8,4 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MatchingRequest {
     private Long memberId;
+    private String chatLink;
+    private String message;
+
 }

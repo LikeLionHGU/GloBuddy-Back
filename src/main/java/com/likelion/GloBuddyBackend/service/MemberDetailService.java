@@ -28,7 +28,6 @@ public class MemberDetailService {
         Member member = memberRepository.findById(dto.getMemberId()).orElseThrow(MemberNotFoundException::new);
         MemberDetail memberDetail = MemberDetail.create(dto,member);
         MemberDetail saved = memberDetailRepository.save(memberDetail);
-
         return saved.getMemberDetailId();
     }
 

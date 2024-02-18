@@ -1,6 +1,7 @@
 package com.likelion.GloBuddyBackend.domain;
 
 import com.likelion.GloBuddyBackend.dto.MemberDetailDto;
+import com.likelion.GloBuddyBackend.dto.MyInfoEditDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberDetail {
+public class MemberDetail extends BaseTime {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,4 +55,10 @@ public class MemberDetail {
         .nation(memberDetailDto.getNation())
         .build();
   }
+
+    public void infoUpdate(MyInfoEditDto dto) {
+      this.gender = dto.getGender();
+      this.nation = dto.getNation();
+      this.mbti =dto.getMbti();
+    }
 }

@@ -11,7 +11,6 @@ public class MemberDetailRequest {
     private Long memberId;
     private String gender;
     private String nation;
-
     private String mbti;
 
 
