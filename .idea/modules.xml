@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GloBuddy-Backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/GloBuddy-Backend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GloBuddy-Backend.iml" filepath="$PROJECT_DIR$/.idea/modules/GloBuddy-Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.likelion.GloBuddy-Backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.likelion.GloBuddy-Backend.main.iml" />
     </modules>
   </component>
 </project>
