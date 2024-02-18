@@ -16,7 +16,7 @@ public class MypageController {
 
     private final MypageService mypageService;
 
-    @PatchMapping("/{memberId}")
+    @PatchMapping("/edit/{memberId}")
     public ResponseEntity<Void> editMember(
             @PathVariable Long memberId, @RequestBody MyInfoEditRequest request) {
 
