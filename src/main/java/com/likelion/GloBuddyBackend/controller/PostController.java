@@ -1,6 +1,7 @@
 package com.likelion.GloBuddyBackend.controller;
 
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
+import com.likelion.GloBuddyBackend.repository.PostRepository;
 import com.likelion.GloBuddyBackend.service.PostService;
 import com.likelion.GloBuddyBackend.controller.request.PostRequest;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import com.likelion.GloBuddyBackend.controller.response.Post.PostResponse;
 import com.likelion.GloBuddyBackend.controller.response.Post.PostIdResponse;
 import com.likelion.GloBuddyBackend.controller.response.Post.PostListResponse;
 
+
 import java.util.List;
 
 @RestController
@@ -20,6 +22,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final PostRepository postRepository;
 
     @PostMapping
     public ResponseEntity<ApiResponse> addPost(@RequestBody PostRequest form) {
@@ -27,14 +30,21 @@ public class PostController {
         ApiResponse response = new PostIdResponse(postId);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping
     public ResponseEntity<ApiResponse> getAllPosts(){
         List<PostDto> postsDto = postService.getAllPosts();
         ApiResponse response = new PostListResponse(postsDto);
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/myprofile/{memberId}")
+    public ResponseEntity<ApiResponse> getPostsByMemberID(@PathVariable Long memberId){
+        List<PostDto> postsDto = postService.getPostsByMemberId(memberId);
+        ApiResponse response = new PostListResponse(postsDto);
+        return ResponseEntity.ok(response);
+    }
 
-    @GetMapping("/{postId}")
+        @GetMapping("/{postId}")
     public ResponseEntity<ApiResponse> getPost(@PathVariable Long postId) {
         PostDto post = postService.getPost(postId);
         ApiResponse response = new PostResponse(post);
@@ -48,12 +58,14 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/{bookId}")
-    public ResponseEntity<ApiResponse> updatePosT(@PathVariable Long postId, @RequestBody PostRequest postRequest){
+    @PatchMapping("/{postId}")
+    public ResponseEntity<ApiResponse> updatePost(@PathVariable Long postId, @RequestBody PostRequest postRequest){
         postService.updatePost(postId, PostDto.from(postRequest));
         ApiResponse response = new PostIdResponse(postId);
         return ResponseEntity.ok(response);
     }
+
+
 
 
 }
