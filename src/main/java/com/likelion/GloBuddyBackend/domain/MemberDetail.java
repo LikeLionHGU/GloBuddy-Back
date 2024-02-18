@@ -1,7 +1,7 @@
 package com.likelion.GloBuddyBackend.domain;
 
 import com.likelion.GloBuddyBackend.dto.MemberDetailDto;
-import com.likelion.GloBuddyBackend.dto.MemberInfoEditDto;
+import com.likelion.GloBuddyBackend.dto.MyInfoEditDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -56,7 +56,7 @@ public class MemberDetail extends BaseTime {
         .build();
   }
 
-    public void infoUpdate(MemberInfoEditDto dto) {
+    public void infoUpdate(MyInfoEditDto dto) {
       this.gender = dto.getGender();
       this.nation = dto.getNation();
       this.mbti =dto.getMbti();
