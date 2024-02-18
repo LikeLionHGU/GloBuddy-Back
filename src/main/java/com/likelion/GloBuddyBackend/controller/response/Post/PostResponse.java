@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class PostResponse extends ApiResponse {
@@ -24,4 +26,5 @@ public class PostResponse extends ApiResponse {
         this.name = post.getName();
         this.createdDate = post.getCreatedDate();
     }
+
 }

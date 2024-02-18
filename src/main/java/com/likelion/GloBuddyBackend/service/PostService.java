@@ -1,6 +1,5 @@
 package com.likelion.GloBuddyBackend.service;
 
-import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.repository.PostRepository;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +8,11 @@ import com.likelion.GloBuddyBackend.dto.PostDto;
 import com.likelion.GloBuddyBackend.domain.Post;
 import com.likelion.GloBuddyBackend.domain.Member;
 import java.util.List;
+import java.util.Optional;
 import com.likelion.GloBuddyBackend.exception.PostNotFoundException;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
-import com.likelion.GloBuddyBackend.controller.response.Post.PostResponse;
-import com.likelion.GloBuddyBackend.controller.response.Post.PostListResponse;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-
+    // 넵
     public Long addPost(PostDto postDto) {
         Member member = memberRepository.findById(postDto.getMemberId()).orElseThrow(MemberNotFoundException::new);
         Post post = postRepository.save(Post.toPost(postDto, member)) ;
@@ -32,20 +32,28 @@ public class PostService {
         return posts.stream().map(PostDto::from).toList();
     }
 
+    public List<PostDto> getPostsByMemberId(Long memberId) { // 멤버 id 받아온걸로 멤버가 있는지 확인해주고 없으면 오류
+        Optional<Member> member = memberRepository.findById(memberId);
+        List<Post> posts = postRepository.findAllByMember(member);
+        return posts.stream().map(PostDto::from).toList();
+    }
+
+
     public PostDto getPost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
         return PostDto.from(post);
     }
 
-
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
     }
 
-    public void updatePost(Long postId,  PostDto postDto) {
+    public void updatePost(Long postId, PostDto postDto) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException());
         post.update(postDto);
         postRepository.save(post);
     }
+
+
 
 }

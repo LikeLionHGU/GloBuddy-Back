@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+
 public interface MatchingMemberRepository extends JpaRepository<MatchingMember, Long> {
 
     @Query("select m from MatchingMember m where m.post.member =:receiver and m.IfMatched = 0 ")

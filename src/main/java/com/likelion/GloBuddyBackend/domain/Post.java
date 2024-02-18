@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Post extends BaseTime{
-    // Id,
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -20,6 +20,8 @@ public class Post extends BaseTime{
 
     @Column(nullable = false)
     private String content;
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -36,6 +38,8 @@ public class Post extends BaseTime{
     public void update(PostDto postDto) {
         this.title = postDto.getTitle();
         this.content = postDto.getContent();
+
+
     }
 
 }

@@ -33,9 +33,9 @@ public class MatchingMember extends BaseTime{
     @JoinColumn(name = "sender_id")
     private Member member;
 
-
+// book - checkout - member //  member - post -me
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_Id" , referencedColumnName = "member_id")
+    @JoinColumn(name = "receiver_Id" )
     private Post post;
 
     public static MatchingMember of(Member sender, Post receiverPost,String chatLink, String message){
