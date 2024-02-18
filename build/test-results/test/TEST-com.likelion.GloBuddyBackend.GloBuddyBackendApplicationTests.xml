@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.likelion.GloBuddyBackend.GloBuddyBackendApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-18T13:52:57" hostname="Viui-MacBookPro.local" time="0.659">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.likelion.GloBuddyBackend.GloBuddyBackendApplicationTests" time="0.659"/>
+  <system-out><![CDATA[22:52:51.363 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.likelion.GloBuddyBackend.GloBuddyBackendApplicationTests]: GloBuddyBackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:52:51.508 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.likelion.GloBuddyBackend.GloBuddyBackendApplication for test class com.likelion.GloBuddyBackend.GloBuddyBackendApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.2)
+
+2024-02-18T22:52:51.983+09:00  INFO 1427 --- [    Test worker] c.l.G.GloBuddyBackendApplicationTests    : Starting GloBuddyBackendApplicationTests using Java 17.0.9 with PID 1427 (started by vidennis in /Users/vidennis/IntelliJ/likelion/GloBuddy-Back)
+2024-02-18T22:52:51.985+09:00  INFO 1427 --- [    Test worker] c.l.G.GloBuddyBackendApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2024-02-18T22:52:52.812+09:00  INFO 1427 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-18T22:52:52.884+09:00  INFO 1427 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 5 JPA repository interfaces.
+2024-02-18T22:52:53.391+09:00  INFO 1427 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-18T22:52:53.454+09:00  INFO 1427 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-02-18T22:52:53.497+09:00  INFO 1427 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-18T22:52:53.713+09:00  INFO 1427 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-18T22:52:53.761+09:00  INFO 1427 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-18T22:52:54.242+09:00  INFO 1427 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1de12397
+2024-02-18T22:52:54.246+09:00  INFO 1427 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-18T22:52:55.318+09:00  INFO 1427 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    alter table matching_member 
+       drop 
+       foreign key FKrif372313ojb7tla569m5q397
+Hibernate: 
+    alter table matching_member 
+       drop 
+       foreign key FKhsf8fcq9pywpuw1w0x81dlnx4
+Hibernate: 
+    alter table member_detail 
+       drop 
+       foreign key FK5b6i0af8bru3xdg80i7ieeokh
+Hibernate: 
+    alter table post 
+       drop 
+       foreign key FK83s99f4kx8oiqm3ro0sasmpww
+Hibernate: 
+    drop table if exists matching_member
+Hibernate: 
+    drop table if exists member
+Hibernate: 
+    drop table if exists member_detail
+Hibernate: 
+    drop table if exists needs
+Hibernate: 
+    drop table if exists post
+Hibernate: 
+    create table matching_member (
+        if_checked bit default false not null,
+        if_matched tinyint default 0 not null,
+        created_date datetime(6),
+        matching_id bigint not null auto_increment,
+        modified_date datetime(6),
+        receiver_id bigint,
+        sender_id bigint,
+        primary key (matching_id)
+    ) engine=InnoDB
+Hibernate: 
+    create table member (
+        member_id bigint not null auto_increment,
+        email varchar(255),
+        name varchar(255),
+        picture varchar(255),
+        primary key (member_id)
+    ) engine=InnoDB
+Hibernate: 
+    create table member_detail (
+        member_detail_id bigint not null auto_increment,
+        member_id bigint,
+        gender varchar(255),
+        mbti varchar(255),
+        nation varchar(255),
+        primary key (member_detail_id)
+    ) engine=InnoDB
+Hibernate: 
+    create table needs (
+        post_id bigint not null auto_increment,
+        name varchar(255) not null,
+        primary key (post_id)
+    ) engine=InnoDB
+Hibernate: 
+    create table post (
+        created_date datetime(6),
+        member_id bigint,
+        modified_date datetime(6),
+        post_id bigint not null auto_increment,
+        content varchar(255) not null,
+        title varchar(255) not null,
+        primary key (post_id)
+    ) engine=InnoDB
+Hibernate: 
+    alter table matching_member 
+       add constraint FKrif372313ojb7tla569m5q397 
+       foreign key (sender_id) 
+       references member (member_id)
+Hibernate: 
+    alter table matching_member 
+       add constraint FKhsf8fcq9pywpuw1w0x81dlnx4 
+       foreign key (receiver_id) 
+       references post (post_id)
+Hibernate: 
+    alter table member_detail 
+       add constraint FK5b6i0af8bru3xdg80i7ieeokh 
+       foreign key (member_id) 
+       references member (member_id)
+Hibernate: 
+    alter table post 
+       add constraint FK83s99f4kx8oiqm3ro0sasmpww 
+       foreign key (member_id) 
+       references member (member_id)
+2024-02-18T22:52:55.686+09:00  INFO 1427 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-18T22:52:56.188+09:00  INFO 1427 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-02-18T22:52:57.386+09:00  WARN 1427 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-18T22:52:57.708+09:00  WARN 1427 --- [    Test worker] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-02-18T22:52:57.857+09:00  INFO 1427 --- [    Test worker] c.l.G.GloBuddyBackendApplicationTests    : Started GloBuddyBackendApplicationTests in 6.195 seconds (process running for 7.746)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
