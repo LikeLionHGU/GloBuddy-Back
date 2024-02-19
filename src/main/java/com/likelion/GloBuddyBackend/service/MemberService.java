@@ -7,6 +7,8 @@ import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -17,9 +19,14 @@ public class MemberService {
 
     public Long addMember(MemberDto dto) {
         Member member = Member.create(dto);
-        Member saved = memberRepository.save(member);
-
-        return saved.getMemberId();
+        if (memberRepository.existsByEmail(dto.getEmail())) {
+// true + memberId 반환
+        }
+        else {
+            Member saved = memberRepository.save(member);
+            return saved.getMemberId();
+//            false 도 같이 반환해야함
+        }
     }
 
     public List<MemberDto> getAllMembers() {

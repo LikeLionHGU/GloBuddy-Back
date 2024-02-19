@@ -31,7 +31,6 @@ public class MatchingMemberController {
 
         MatchingMember matchingMember = matchingService.createMatchingRequest(matchingMemberDto , receiverPostId);
 
-
         ApiResponse response = new RequestMatchingResponse(matchingMemberDto);
 
         return ResponseEntity.ok(response);
