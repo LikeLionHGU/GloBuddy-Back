@@ -29,9 +29,9 @@ public class MatchingMemberController {
 
         MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(request);
 
-        MatchingMember matchingMember = matchingService.createMatchingRequest(matchingMemberDto , receiverPostId);
+        MatchingMemberDto resultDto = matchingService.createMatchingRequest(matchingMemberDto , receiverPostId);
 
-        ApiResponse response = new RequestMatchingResponse(matchingMemberDto);
+        ApiResponse response = new RequestMatchingResponse(resultDto);
 
         return ResponseEntity.ok(response);
     }

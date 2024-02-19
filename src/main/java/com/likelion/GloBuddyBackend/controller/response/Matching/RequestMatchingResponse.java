@@ -17,7 +17,16 @@ public class RequestMatchingResponse extends ApiResponse {
     private Long matchingId ;
 
     private Long senderId;
+
+    private String senderName;
+    private String senderMbti;
+    private String senderGender;
+    private String senderNation;
+
     private Long receiverId;
+
+
+
 
     private byte IfMatched;
 
@@ -30,10 +39,16 @@ public class RequestMatchingResponse extends ApiResponse {
     public RequestMatchingResponse(MatchingMemberDto dto){
         this.matchingId= dto.getMatchingId();
         this.senderId = dto.getSenderId();
+        this.senderName = dto.getSenderName();
+        this.senderMbti = dto.getSenderMbti();
+        this.senderGender = dto.getSenderGender();
+        this.senderNation = dto.getSenderNation();
         this.receiverId =dto.getReceiverId();
         this.IfChecked = dto.isIfChecked();
         this.IfMatched = dto.getIfMatched();
         this.chatLink = dto.getChatLink();
         this.message = dto.getMessage();
     }
+
+
 }

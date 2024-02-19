@@ -2,6 +2,7 @@ package com.likelion.GloBuddyBackend.service;
 
 import com.likelion.GloBuddyBackend.domain.MatchingMember;
 import com.likelion.GloBuddyBackend.domain.Member;
+import com.likelion.GloBuddyBackend.domain.MemberDetail;
 import com.likelion.GloBuddyBackend.domain.Post;
 import com.likelion.GloBuddyBackend.dto.MatchingMemberDto;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
@@ -10,6 +11,7 @@ import com.likelion.GloBuddyBackend.exception.MatchingNotFountException;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
 import com.likelion.GloBuddyBackend.exception.PostNotFoundException;
 import com.likelion.GloBuddyBackend.repository.MatchingMemberRepository;
+import com.likelion.GloBuddyBackend.repository.MemberDetailRepository;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import com.likelion.GloBuddyBackend.repository.PostRepository;
 import jakarta.transaction.Transactional;
@@ -24,11 +26,14 @@ public class MatchingMemberService {
 
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
+    private final MemberDetailRepository memberDetailRepository;
     private final MatchingMemberRepository matchingMemberRepository;
 
-    public MatchingMember createMatchingRequest(MatchingMemberDto dto , Long postId) {
+    public MatchingMemberDto createMatchingRequest(MatchingMemberDto dto , Long postId) {
 
         Member sender = memberRepository.findById(dto.getSenderId()).orElseThrow(MemberNotFoundException::new);
+
+        MemberDetail senderInfo= memberDetailRepository.findAllByMember(sender.getMemberId());
 
         Post receiverPost = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
 
@@ -37,7 +42,7 @@ public class MatchingMemberService {
 
         MatchingMember saved = matchingMemberRepository.save(matchingMember);
 
-        return saved;
+        return MatchingMemberDto.of(saved,senderInfo);
     }
 
 

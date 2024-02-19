@@ -4,6 +4,7 @@ import com.likelion.GloBuddyBackend.controller.request.MatchingChoiceRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
 import com.likelion.GloBuddyBackend.domain.MatchingMember;
 import com.likelion.GloBuddyBackend.domain.Member;
+import com.likelion.GloBuddyBackend.domain.MemberDetail;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,6 +14,12 @@ public class MatchingMemberDto {
 
     private Long matchingId;
     private Long senderId;
+
+    private String senderName;
+    private String senderMbti;
+    private String senderGender;
+    private String senderNation;
+
     private Long postId;
     private Long receiverId;
 
@@ -53,8 +60,6 @@ public class MatchingMemberDto {
 
 
 
-
-
     public static MatchingMemberDto of(MatchingMember matchingMember) {
 
         return MatchingMemberDto.builder()
@@ -64,6 +69,24 @@ public class MatchingMemberDto {
                 .ifMatched(matchingMember.getIfMatched())
                 .ifChecked(matchingMember.isIfChecked())
                 .chatLink(matchingMember.getChatLink())
+                .senderName(matchingMember.getMember().getName())
+                .message(matchingMember.getMessage())
+                .build();
+    }
+
+    public static MatchingMemberDto of(MatchingMember matchingMember, MemberDetail detail) {
+
+        return MatchingMemberDto.builder()
+                .matchingId(matchingMember.getMatchingId())
+                .senderId(matchingMember.getMember().getMemberId())
+                .receiverId(matchingMember.getPost().getMember().getMemberId())
+                .ifMatched(matchingMember.getIfMatched())
+                .ifChecked(matchingMember.isIfChecked())
+                .chatLink(matchingMember.getChatLink())
+                .senderName(matchingMember.getMember().getName())
+                .senderMbti(detail.getMbti())
+                .senderGender(detail.getGender())
+                .senderNation(detail.getNation())
                 .message(matchingMember.getMessage())
                 .build();
     }
