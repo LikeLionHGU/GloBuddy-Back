@@ -34,7 +34,7 @@ public class MatchingMember extends BaseTime {
     @JoinColumn(name = "sender_id")
     private Member member;
 
-    private Long receiverId;
+
 
     // book - checkout - member //  member - post -me
     @ManyToOne(fetch = FetchType.LAZY)
@@ -59,7 +59,6 @@ public class MatchingMember extends BaseTime {
                 .IfChecked(dto.isIfChecked())
                 .chatLink(dto.getChatLink())
                 .message(dto.getMessage())
-                .receiverId(post.getMember().getMemberId())
                 .build();
 
     }

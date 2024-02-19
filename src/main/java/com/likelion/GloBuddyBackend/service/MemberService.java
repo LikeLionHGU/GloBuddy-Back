@@ -21,6 +21,7 @@ public class MemberService {
         Member member = Member.create(dto);
         if (memberRepository.existsByEmail(dto.getEmail())) {
 // true + memberId 반환
+
         }
         else {
             Member saved = memberRepository.save(member);
