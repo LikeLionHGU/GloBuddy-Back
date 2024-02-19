@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/matching")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class MatchingMemberController {
 
     private final MatchingMemberService matchingService;
