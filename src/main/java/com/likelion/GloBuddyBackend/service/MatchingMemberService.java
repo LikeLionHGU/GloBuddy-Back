@@ -26,14 +26,14 @@ public class MatchingMemberService {
     private final PostRepository postRepository;
     private final MatchingMemberRepository matchingMemberRepository;
 
-    public MatchingMember createMatchingRequest(Long senderId, Long postId, String chatLink, String message) {
+    public MatchingMember createMatchingRequest(MatchingMemberDto dto , Long postId) {
 
-        Member sender = memberRepository.findById(senderId).orElseThrow(MemberNotFoundException::new);
+        Member sender = memberRepository.findById(dto.getSenderId()).orElseThrow(MemberNotFoundException::new);
 
         Post receiverPost = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
 
 
-        MatchingMember matchingMember = MatchingMember.of(sender, receiverPost, chatLink, message);
+        MatchingMember matchingMember = MatchingMember.of(sender,receiverPost,dto);
 
         MatchingMember saved = matchingMemberRepository.save(matchingMember);
 
@@ -47,11 +47,13 @@ public class MatchingMemberService {
         return receiveMail.stream().map(MatchingMemberDto::of).toList();
     }
 
+
     public List<MatchingMemberDto> getAllReceiveMail(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
         List<MatchingMember> sentMail = matchingMemberRepository.findAllByMemberIdAndIfNotMatched(member);
         return sentMail.stream().map(MatchingMemberDto::of).toList();
     }
+
 
 
     public Long getNumOfReceiveMail(Long receiverId) {
@@ -60,6 +62,7 @@ public class MatchingMemberService {
 
         return received;
     }
+
 
     public Long getNumOfSentMail(Long senderId) {
         Member sender = memberRepository.findById(senderId).orElseThrow(MemberNotFoundException::new);

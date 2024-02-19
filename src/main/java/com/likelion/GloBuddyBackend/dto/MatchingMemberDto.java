@@ -13,6 +13,7 @@ public class MatchingMemberDto {
 
     private Long matchingId;
     private Long senderId;
+    private Long postId;
     private Long receiverId;
 
     private byte ifMatched;

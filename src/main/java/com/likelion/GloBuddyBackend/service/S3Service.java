@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+
 @Service
 @RequiredArgsConstructor
 public class S3Service {
@@ -36,11 +37,13 @@ public class S3Service {
     public ResponseEntity<UrlResource> downloadImage(String originalFilename) {
         UrlResource urlResource = new UrlResource(amazonS3.getUrl(bucket, originalFilename));
 
-        String contentDisposition = "attachment; filename=\"" +  originalFilename + "\"";
+        String contentDisposition = "attachment; filename=\"" + originalFilename + "\"";
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(urlResource);
 
     }
+
+
 }

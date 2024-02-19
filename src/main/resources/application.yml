@@ -21,8 +21,8 @@ cloud:
     s3:
       bucket: glob-min
     credentials:
-      access-key:"안녕안녕"
-      secret-key:"보이니"
+      access-key:
+      secret-key:
     region:
       static: ap-northeast-2
       auto: false

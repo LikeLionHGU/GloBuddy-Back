@@ -27,10 +27,11 @@ public class MatchingMemberController {
     @PostMapping("/{receiverPostId}")
     public ResponseEntity<ApiResponse> requestMatching(@PathVariable Long receiverPostId, @RequestBody MatchingRequest request) {
 
-        MatchingMember matchingMember = matchingService.createMatchingRequest(request.getMemberId(), receiverPostId, request.getChatLink(), request.getMessage());
+        MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(request);
+
+        MatchingMember matchingMember = matchingService.createMatchingRequest(matchingMemberDto , receiverPostId);
 
 
-        MatchingMemberDto matchingMemberDto = MatchingMemberDto.of(matchingMember);
         ApiResponse response = new RequestMatchingResponse(matchingMemberDto);
 
         return ResponseEntity.ok(response);
