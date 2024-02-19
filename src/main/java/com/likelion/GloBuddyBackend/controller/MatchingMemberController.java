@@ -3,10 +3,7 @@ package com.likelion.GloBuddyBackend.controller;
 import com.likelion.GloBuddyBackend.controller.request.MatchingChoiceRequest;
 import com.likelion.GloBuddyBackend.controller.request.MatchingRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
-import com.likelion.GloBuddyBackend.controller.response.Matching.MailNumResponse;
-import com.likelion.GloBuddyBackend.controller.response.Matching.MailListResponse;
-import com.likelion.GloBuddyBackend.controller.response.Matching.MailResponse;
-import com.likelion.GloBuddyBackend.controller.response.Matching.RequestMatchingResponse;
+import com.likelion.GloBuddyBackend.controller.response.Matching.*;
 import com.likelion.GloBuddyBackend.domain.MatchingMember;
 import com.likelion.GloBuddyBackend.dto.MatchingMemberDto;
 import com.likelion.GloBuddyBackend.service.MatchingMemberService;
@@ -67,7 +64,7 @@ public class MatchingMemberController {
         List<MatchingMemberDto> matchingList = matchingService.getAllReceiveMail(memberId);
 
 
-        ApiResponse response = new MailListResponse(matchingList);
+        ApiResponse response = new RequestMatchingListResponse(matchingList);
 
         return ResponseEntity.ok(response);
     }

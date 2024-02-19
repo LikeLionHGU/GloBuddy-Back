@@ -11,7 +11,6 @@ import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class RequestMatchingResponse extends ApiResponse {
 
     private Long matchingId ;
