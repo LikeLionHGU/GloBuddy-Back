@@ -1,6 +1,7 @@
 package com.likelion.GloBuddyBackend.service;
 
 import com.likelion.GloBuddyBackend.domain.Member;
+import com.likelion.GloBuddyBackend.dto.EnterSiteDto;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
@@ -17,17 +18,22 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Long addMember(MemberDto dto) {
+    public EnterSiteDto addMember(MemberDto dto) {
         Member member = Member.create(dto);
-        if (memberRepository.existsByEmail(dto.getEmail())) {
-// true + memberId 반환
+        EnterSiteDto registered = new EnterSiteDto();
 
+        if (memberRepository.existsByEmail(dto.getEmail())) {
+            Long memberId = memberRepository.findByEmail(dto.getEmail()).getMemberId();
+            registered.setMemberId(memberId);
+            registered.setRegistered(true);
         }
         else {
             Member saved = memberRepository.save(member);
-            return saved.getMemberId();
-//            false 도 같이 반환해야함
+            registered.setMemberId(saved.getMemberId());
+            registered.setRegistered(false);
+
         }
+        return registered;
     }
 
     public List<MemberDto> getAllMembers() {
