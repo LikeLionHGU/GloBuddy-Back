@@ -28,5 +28,7 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember, 
     @Query("select count(*) from MatchingMember m where m.member =:sender  and m.IfChecked = false ")
     long getNumOfSentMail(Member sender);
 
+    MatchingMember findByMember(Member member);
+
 
 }
