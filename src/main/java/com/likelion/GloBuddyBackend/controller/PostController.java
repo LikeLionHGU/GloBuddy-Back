@@ -37,14 +37,23 @@ public class PostController {
         ApiResponse response = new PostListResponse(postsDto);
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/myprofile/{memberId}")
+
+    @GetMapping("/test") // 삭제된 게시물까지
+    public ResponseEntity<ApiResponse> getAllPostsIncludeDeleted(){
+        List<PostDto> postsDto = postService.getAllPostsIncludeDeleted();
+        ApiResponse response = new PostListResponse(postsDto);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping("/mypost/{memberId}")
     public ResponseEntity<ApiResponse> getPostsByMemberID(@PathVariable Long memberId){
         List<PostDto> postsDto = postService.getPostsByMemberId(memberId);
         ApiResponse response = new PostListResponse(postsDto);
         return ResponseEntity.ok(response);
     }
 
-        @GetMapping("/{postId}")
+    @GetMapping("/{postId}")
     public ResponseEntity<ApiResponse> getPost(@PathVariable Long postId) {
         PostDto post = postService.getPost(postId);
         ApiResponse response = new PostResponse(post);

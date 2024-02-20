@@ -20,7 +20,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-    // 넵
+
     public Long addPost(PostDto postDto) {
         Member member = memberRepository.findById(postDto.getMemberId()).orElseThrow(MemberNotFoundException::new);
         Post post = postRepository.save(Post.toPost(postDto, member)) ;
@@ -28,6 +28,11 @@ public class PostService {
     }
 
     public List<PostDto> getAllPosts() {
+        List<Post> posts = postRepository.findAllByDeletedFalse();
+        return posts.stream().map(PostDto::from).toList();
+    }
+
+    public List<PostDto> getAllPostsIncludeDeleted() {
         List<Post> posts = postRepository.findAll();
         return posts.stream().map(PostDto::from).toList();
     }
@@ -45,7 +50,10 @@ public class PostService {
     }
 
     public void deletePost(Long postId) {
-        postRepository.deleteById(postId);
+        Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException());
+        post.delete(post);
+        PostDto.from(post);
+        postRepository.save(post); // 엔티티형태로 저장되어야함
     }
 
     public void updatePost(Long postId, PostDto postDto) {

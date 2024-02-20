@@ -18,6 +18,7 @@ public class PostDto {
     private String title;
     private String content;
     private String name;
+    private boolean deleted;
     private LocalDateTime createdDate;
 
     public static PostDto from(Post post) {  // DataToObject
@@ -28,6 +29,7 @@ public class PostDto {
                 .content(post.getContent())
                 .createdDate(post.getCreatedDate())
                 .name(post.getMember().getName())
+                .deleted(post.isDeleted())
                 .build();
     }
 
@@ -39,5 +41,6 @@ public class PostDto {
                 .build();
 
     }
+
 
 }
