@@ -1,5 +1,6 @@
 package com.likelion.GloBuddyBackend.dto;
 
+import com.likelion.GloBuddyBackend.domain.MemberDetail;
 import com.likelion.GloBuddyBackend.domain.Needs;
 import com.likelion.GloBuddyBackend.domain.Post;
 import com.likelion.GloBuddyBackend.controller.request.PostRequest;
@@ -25,7 +26,11 @@ public class PostDto {
     private String needs;
     private String needs2;
     private String needs3;
+    private String mbti;
+    private String gender;
+    private String nation;
 
+    // post 세부내용 가져올 때쓰는 from
     public static PostDto from(Post post) {  // DataToObject
         return PostDto.builder()
                 .postId(post.getPostId())
@@ -38,7 +43,7 @@ public class PostDto {
                 .build();
     }
 
-    public static PostDto from(Post post, Needs needs) {  // DataToObject
+    public static PostDto from(Post post, Needs needs, MemberDetail detail) {  // DataToObject
         return PostDto.builder()
                 .postId(post.getPostId())
                 .memberId(post.getMember().getMemberId())
@@ -50,6 +55,10 @@ public class PostDto {
 
                 .color(needs.getColor())
                 .needs(needs.getNeeds())
+
+                .mbti(detail.getMbti())
+                .gender(detail.getGender())
+                .nation(detail.getNation())
                 .build();
     }
 

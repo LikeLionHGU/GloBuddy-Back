@@ -1,7 +1,9 @@
 package com.likelion.GloBuddyBackend.service;
 
+import com.likelion.GloBuddyBackend.domain.MemberDetail;
 import com.likelion.GloBuddyBackend.domain.Needs;
 import com.likelion.GloBuddyBackend.dto.NeedsDto;
+import com.likelion.GloBuddyBackend.repository.MemberDetailRepository;
 import com.likelion.GloBuddyBackend.repository.PostRepository;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
     private final NeedsRepository needsRepository;
+    private final MemberDetailRepository memberDetailRepository;
+
 
     public Long addPost(PostDto postDto) {
         Member member = memberRepository.findById(postDto.getMemberId()).orElseThrow(MemberNotFoundException::new);
@@ -36,11 +40,12 @@ public class PostService {
 
     public List<PostDto> getAllPosts() {
         List<Post> posts = postRepository.findAllByDeletedFalse();
-
+        List<Member> members = memberRepository.findAll();
          return posts.stream()
                 .map(postInfo -> {
                     Needs needs = needsRepository.findAllByPosts(postInfo.getPostId());
-                    return PostDto.from(postInfo,needs);
+                    MemberDetail detail = memberDetailRepository.findAllByMember(postInfo.getMember().getMemberId());
+                    return PostDto.from(postInfo,needs,detail);
                     })
                     .toList();
 

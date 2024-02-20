@@ -27,8 +27,7 @@ public class Post extends BaseTime{
     @JoinColumn(name = "member_id")
     private Member member ;
 
-//    @OneToMany
-//    private Needs needs;
+
     public static Post toPost(PostDto postDto, Member member){ // 레포지토리 들어가는 용
         return Post.builder()
                 .title(postDto.getTitle())
@@ -39,15 +38,17 @@ public class Post extends BaseTime{
     }
 
 
-    public static PostDto of(Post post , Needs needs) {
+    public static PostDto of(Post post , Needs needs, MemberDetail memberDetail) { // dto로 나가는 용도
         return PostDto.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
                 .deleted(post.isDeleted())
                 .needs(needs.getNeeds())
                 .color(needs.getColor())
+                .nation(memberDetail.getNation())
+                .mbti(memberDetail.getMbti())
+                .gender(memberDetail.getGender())
                 .build();
-
     }
 
     public void delete(Post post) {

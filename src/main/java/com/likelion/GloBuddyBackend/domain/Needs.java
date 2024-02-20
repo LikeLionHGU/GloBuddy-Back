@@ -17,8 +17,6 @@ public class Needs {
 
     @Column(nullable = false)
     private String needs;
-
-    @Column(nullable = false)
     private String color;
 
     @ManyToOne(fetch = FetchType.LAZY)
