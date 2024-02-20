@@ -12,4 +12,6 @@ public class PostRequest {
     private String needs;
     private String needs2;
     private String needs3;
+    private String color;
+
 }

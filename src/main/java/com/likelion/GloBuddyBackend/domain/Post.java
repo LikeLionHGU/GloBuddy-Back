@@ -27,13 +27,27 @@ public class Post extends BaseTime{
     @JoinColumn(name = "member_id")
     private Member member ;
 
+//    @OneToMany
+//    private Needs needs;
     public static Post toPost(PostDto postDto, Member member){ // 레포지토리 들어가는 용
         return Post.builder()
                 .title(postDto.getTitle())
                 .content(postDto.getContent())
                 .member(member)
-                .deleted(false) //  삭제가 false인 상태로 레포지토리에 들어간다
+                .deleted(false)
                 .build();
+    }
+
+
+    public static PostDto of(Post post , Needs needs) {
+        return PostDto.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .deleted(post.isDeleted())
+                .needs(needs.getNeeds())
+                .color(needs.getColor())
+                .build();
+
     }
 
     public void delete(Post post) {

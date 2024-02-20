@@ -1,5 +1,6 @@
 package com.likelion.GloBuddyBackend.domain;
 
+import com.likelion.GloBuddyBackend.dto.NeedsDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,9 +13,26 @@ public class Needs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
+    private Long NeedsId;
 
     @Column(nullable = false)
-    private String name;
+    private String needs;
+
+    @Column(nullable = false)
+    private String color;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+    public static Needs toNeeds(NeedsDto needsDto, Post post) {
+        return Needs.builder()
+                .post(post)
+                .needs(needsDto.getNeeds())
+                .color(needsDto.getColor())
+                .build();
+    }
+
+
 
 }

@@ -1,5 +1,7 @@
 package com.likelion.GloBuddyBackend.service;
 
+import com.likelion.GloBuddyBackend.domain.Needs;
+import com.likelion.GloBuddyBackend.dto.NeedsDto;
 import com.likelion.GloBuddyBackend.repository.PostRepository;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import com.likelion.GloBuddyBackend.exception.PostNotFoundException;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
+import com.likelion.GloBuddyBackend.repository.NeedsRepository;
 
 
 
@@ -20,16 +23,27 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final NeedsRepository needsRepository;
 
     public Long addPost(PostDto postDto) {
         Member member = memberRepository.findById(postDto.getMemberId()).orElseThrow(MemberNotFoundException::new);
         Post post = postRepository.save(Post.toPost(postDto, member)) ;
+        NeedsDto needsDto = NeedsDto.from(postDto);
+        Needs needs = Needs.toNeeds(needsDto,post);
+        needsRepository.save(needs);
         return post.getPostId();
     }
 
     public List<PostDto> getAllPosts() {
         List<Post> posts = postRepository.findAllByDeletedFalse();
-        return posts.stream().map(PostDto::from).toList();
+
+         return posts.stream()
+                .map(postInfo -> {
+                    Needs needs = needsRepository.findAllByPosts(postInfo.getPostId());
+                    return PostDto.from(postInfo,needs);
+                    })
+                    .toList();
+
     }
 
     public List<PostDto> getAllPostsIncludeDeleted() {
