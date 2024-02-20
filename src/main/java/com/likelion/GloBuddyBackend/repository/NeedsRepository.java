@@ -10,4 +10,5 @@ public interface NeedsRepository extends JpaRepository<Needs, Long> {
     Needs findByPost(Post post);
     @Query("select m from Needs m where m.post.postId =:postId")
     Needs findAllByPosts(Long postId);
+
 }

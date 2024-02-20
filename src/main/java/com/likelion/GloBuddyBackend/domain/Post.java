@@ -59,5 +59,4 @@ public class Post extends BaseTime{
         this.content = postDto.getContent();
 
     }
-
 }

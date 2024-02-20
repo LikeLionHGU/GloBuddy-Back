@@ -70,8 +70,5 @@ public class PostDto {
                 .needs(postRequest.getNeeds())
                 .color(postRequest.getColor())
                 .build();
-
     }
-
-
 }
