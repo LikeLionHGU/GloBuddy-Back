@@ -1,6 +1,7 @@
 package com.likelion.GloBuddyBackend.controller.response.Member;
 
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
+import com.likelion.GloBuddyBackend.dto.EnterSiteDto;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +26,6 @@ public class MemberResponse extends ApiResponse {
       this.email = dto.getEmail();
       this.image = dto.getPicture();
   }
+
+
 }

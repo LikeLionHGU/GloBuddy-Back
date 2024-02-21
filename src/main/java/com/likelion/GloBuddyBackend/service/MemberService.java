@@ -1,12 +1,15 @@
 package com.likelion.GloBuddyBackend.service;
 
 import com.likelion.GloBuddyBackend.domain.Member;
+import com.likelion.GloBuddyBackend.dto.EnterSiteDto;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -15,11 +18,22 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Long addMember(MemberDto dto) {
+    public EnterSiteDto addMember(MemberDto dto) {
         Member member = Member.create(dto);
-        Member saved = memberRepository.save(member);
+        EnterSiteDto registered = new EnterSiteDto();
 
-        return saved.getMemberId();
+        if (memberRepository.existsByEmail(dto.getEmail())) {
+            Long memberId = memberRepository.findByEmail(dto.getEmail()).getMemberId();
+            registered.setMemberId(memberId);
+            registered.setRegistered(true);
+        }
+        else {
+            Member saved = memberRepository.save(member);
+            registered.setMemberId(saved.getMemberId());
+            registered.setRegistered(false);
+
+        }
+        return registered;
     }
 
     public List<MemberDto> getAllMembers() {

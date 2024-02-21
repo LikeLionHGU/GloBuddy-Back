@@ -18,6 +18,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/memberDetail")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class MemberDetailController {
 
   private final MemberDetailService memberDetailService;

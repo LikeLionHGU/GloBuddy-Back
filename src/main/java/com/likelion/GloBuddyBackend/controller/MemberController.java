@@ -2,8 +2,10 @@ package com.likelion.GloBuddyBackend.controller;
 
 import com.likelion.GloBuddyBackend.controller.request.MemberRequest;
 import com.likelion.GloBuddyBackend.controller.response.ApiResponse;
+import com.likelion.GloBuddyBackend.controller.response.Member.EnterMemberResponse;
 import com.likelion.GloBuddyBackend.controller.response.Member.MemberListResponse;
 import com.likelion.GloBuddyBackend.controller.response.Member.MemberResponse;
+import com.likelion.GloBuddyBackend.dto.EnterSiteDto;
 import com.likelion.GloBuddyBackend.dto.MemberDto;
 import com.likelion.GloBuddyBackend.service.MemberService;
 import jakarta.transaction.Transactional;
@@ -17,18 +19,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class MemberController {
 
   private final MemberService memberService;
 
   @PostMapping
-  public ResponseEntity<ApiResponse> addMember(@RequestBody MemberRequest request) {
+  public ResponseEntity<EnterMemberResponse> addMember(@RequestBody MemberRequest request) {
     MemberDto dto = MemberDto.of(request);
-    Long memberId = memberService.addMember(dto);
-    URI uri = URI.create("/member/" + memberId);
+    EnterSiteDto enterMember = memberService.addMember(dto);
 
+    EnterMemberResponse response = new EnterMemberResponse(enterMember);
 
-    return ResponseEntity.created(uri).build();
+    return ResponseEntity.ok(response);
+
   }
 
   @GetMapping

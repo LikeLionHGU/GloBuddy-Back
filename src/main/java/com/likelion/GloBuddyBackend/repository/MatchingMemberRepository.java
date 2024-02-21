@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface MatchingMemberRepository extends JpaRepository<MatchingMember, Long> {
 
-    @Query("select m from MatchingMember m where m.post.member =:receiver and m.IfMatched = 0 ")
+    @Query("select m from MatchingMember m where m.post.member =:receiver ")
     List<MatchingMember> findAllByMemberIdAndIfNotMatched(Member receiver);
 
 
@@ -27,6 +27,8 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember, 
     //    보낸 알림 개수 ( 보낸 사람 : 본인 && Checked 안 한 거 )
     @Query("select count(*) from MatchingMember m where m.member =:sender  and m.IfChecked = false ")
     long getNumOfSentMail(Member sender);
+
+    MatchingMember findByMember(Member member);
 
 
 }
