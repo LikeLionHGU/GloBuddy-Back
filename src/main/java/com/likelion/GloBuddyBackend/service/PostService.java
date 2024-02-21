@@ -1,5 +1,9 @@
 package com.likelion.GloBuddyBackend.service;
 
+import com.likelion.GloBuddyBackend.domain.MemberDetail;
+import com.likelion.GloBuddyBackend.domain.Needs;
+import com.likelion.GloBuddyBackend.dto.NeedsDto;
+import com.likelion.GloBuddyBackend.repository.MemberDetailRepository;
 import com.likelion.GloBuddyBackend.repository.PostRepository;
 import com.likelion.GloBuddyBackend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import com.likelion.GloBuddyBackend.exception.PostNotFoundException;
 import com.likelion.GloBuddyBackend.exception.MemberNotFoundException;
+import com.likelion.GloBuddyBackend.repository.NeedsRepository;
 
 
 
@@ -20,14 +25,33 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-    // 넵
+    private final NeedsRepository needsRepository;
+    private final MemberDetailRepository memberDetailRepository;
+
+
     public Long addPost(PostDto postDto) {
         Member member = memberRepository.findById(postDto.getMemberId()).orElseThrow(MemberNotFoundException::new);
         Post post = postRepository.save(Post.toPost(postDto, member)) ;
+        NeedsDto needsDto = NeedsDto.from(postDto);
+        Needs needs = Needs.toNeeds(needsDto,post);
+        needsRepository.save(needs);
         return post.getPostId();
     }
 
     public List<PostDto> getAllPosts() {
+        List<Post> posts = postRepository.findAllByDeletedFalse();
+        List<Member> members = memberRepository.findAll();
+         return posts.stream()
+                .map(postInfo -> {
+                    Needs needs = needsRepository.findAllByPosts(postInfo.getPostId());
+                    MemberDetail detail = memberDetailRepository.findAllByMember(postInfo.getMember().getMemberId());
+                    return PostDto.from(postInfo,needs,detail);
+                    })
+                    .toList();
+
+    }
+
+    public List<PostDto> getAllPostsIncludeDeleted() {
         List<Post> posts = postRepository.findAll();
         return posts.stream().map(PostDto::from).toList();
     }
@@ -45,7 +69,10 @@ public class PostService {
     }
 
     public void deletePost(Long postId) {
-        postRepository.deleteById(postId);
+        Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException());
+        post.delete(post);
+        PostDto.from(post);
+        postRepository.save(post); // 엔티티형태로 저장되어야함
     }
 
     public void updatePost(Long postId, PostDto postDto) {
@@ -53,7 +80,6 @@ public class PostService {
         post.update(postDto);
         postRepository.save(post);
     }
-
 
 
 }

@@ -18,7 +18,6 @@ public class MemberDetail extends BaseTime {
 
   private String gender;
   private String nation;
-
   private String mbti;
 
   @ManyToOne(fetch = FetchType.LAZY)

@@ -21,25 +21,42 @@ public class Post extends BaseTime{
     @Column(nullable = false)
     private String content;
 
-
+    private boolean deleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member member ;
 
-    public static Post toPost(PostDto postDto, Member member){
+
+    public static Post toPost(PostDto postDto, Member member){ // 레포지토리 들어가는 용
         return Post.builder()
                 .title(postDto.getTitle())
                 .content(postDto.getContent())
                 .member(member)
+                .deleted(false)
                 .build();
     }
 
+
+    public static PostDto of(Post post , Needs needs, MemberDetail memberDetail) { // dto로 나가는 용도
+        return PostDto.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .deleted(post.isDeleted())
+                .needs(needs.getNeeds())
+                .color(needs.getColor())
+                .nation(memberDetail.getNation())
+                .mbti(memberDetail.getMbti())
+                .gender(memberDetail.getGender())
+                .build();
+    }
+
+    public void delete(Post post) {
+        post.deleted = true;
+    }
     public void update(PostDto postDto) {
         this.title = postDto.getTitle();
         this.content = postDto.getContent();
 
-
     }
-
 }

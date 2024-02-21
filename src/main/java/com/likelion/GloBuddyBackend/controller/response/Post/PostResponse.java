@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
-
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class PostResponse extends ApiResponse {
@@ -16,15 +13,17 @@ public class PostResponse extends ApiResponse {
     private Long postId;
     private String title;
     private String content;
-    private String name;
+    private boolean deleted;
     private LocalDateTime createdDate;
+
 
     public PostResponse(PostDto post) {
         this.postId = post.getPostId();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.name = post.getName();
+        this.deleted = post.isDeleted();
         this.createdDate = post.getCreatedDate();
+
     }
 
 }
