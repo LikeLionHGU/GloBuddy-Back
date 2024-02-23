@@ -8,6 +8,8 @@ import com.likelion.GloBuddyBackend.domain.MemberDetail;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 public class MatchingMemberDto {
@@ -29,6 +31,7 @@ public class MatchingMemberDto {
     private boolean ifChecked;
     private String chatLink;
     private String message;
+    private LocalDateTime createdTime;
 
 
 
@@ -83,7 +86,7 @@ public class MatchingMemberDto {
                 .senderId(matchingMember.getMember().getMemberId())
                 .receiverId(matchingMember.getPost().getMember().getMemberId())
                 .receiverName((matchingMember.getPost().getMember().getName()))
-
+                .createdTime(matchingMember.getCreatedDate())
                 .ifMatched(matchingMember.getIfMatched())
                 .ifChecked(matchingMember.isIfChecked())
                 .chatLink(matchingMember.getChatLink())
