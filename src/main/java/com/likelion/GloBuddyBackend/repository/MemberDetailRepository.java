@@ -13,6 +13,8 @@ public interface MemberDetailRepository extends JpaRepository<MemberDetail, Long
 
   @Query("select m from MemberDetail m where m.member.memberId= :memberId")
   MemberDetail findAllByMember(Long memberId);
+
+  MemberDetail findByMember(Member member);
 }
 
 

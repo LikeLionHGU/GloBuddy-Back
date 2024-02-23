@@ -11,10 +11,12 @@ import java.util.List;
 
 public interface MatchingMemberRepository extends JpaRepository<MatchingMember, Long> {
 
-    @Query("select m from MatchingMember m where m.post.member =:receiver ")
+
+//    수신 : 본인
+    @Query("select m from MatchingMember m where( m.post.member =:receiver and m.IfMatched = 0) OR ( m.member =:receiver and m.IfMatched !=0)")
     List<MatchingMember> findAllByMemberIdAndIfNotMatched(Member receiver);
 
-
+// 송신 : 본인 * 읽음 표시 클릭 안 했을 때
     @Query("select m from MatchingMember m where m.member =:sender  and m.IfChecked = false ")
     List<MatchingMember> findAllByMemberIdAndIfNotChecked(Member sender);
 

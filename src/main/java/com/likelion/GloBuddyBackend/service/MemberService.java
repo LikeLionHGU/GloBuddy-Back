@@ -31,7 +31,6 @@ public class MemberService {
             Member saved = memberRepository.save(member);
             registered.setMemberId(saved.getMemberId());
             registered.setRegistered(false);
-
         }
         return registered;
     }
