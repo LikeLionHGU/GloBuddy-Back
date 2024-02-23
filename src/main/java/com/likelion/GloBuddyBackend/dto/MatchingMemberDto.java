@@ -22,6 +22,7 @@ public class MatchingMemberDto {
 
     private Long postId;
     private Long receiverId;
+    private String receiverName;
 
     private byte ifMatched;
 
@@ -66,6 +67,7 @@ public class MatchingMemberDto {
                 .matchingId(matchingMember.getMatchingId())
                 .senderId(matchingMember.getMember().getMemberId())
                 .receiverId(matchingMember.getPost().getMember().getMemberId())
+                .receiverName((matchingMember.getPost().getMember().getName()))
                 .ifMatched(matchingMember.getIfMatched())
                 .ifChecked(matchingMember.isIfChecked())
                 .chatLink(matchingMember.getChatLink())
@@ -80,6 +82,8 @@ public class MatchingMemberDto {
                 .matchingId(matchingMember.getMatchingId())
                 .senderId(matchingMember.getMember().getMemberId())
                 .receiverId(matchingMember.getPost().getMember().getMemberId())
+                .receiverName((matchingMember.getPost().getMember().getName()))
+
                 .ifMatched(matchingMember.getIfMatched())
                 .ifChecked(matchingMember.isIfChecked())
                 .chatLink(matchingMember.getChatLink())
