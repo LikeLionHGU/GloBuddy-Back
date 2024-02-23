@@ -13,7 +13,7 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember, 
 
 
 //    수신 : 본인
-    @Query("select m from MatchingMember m where( m.post.member =:receiver and m.IfMatched = 0) OR ( m.member =:receiver and m.IfMatched !=0)")
+    @Query("select m from MatchingMember m where m.post.member =:receiver and m.IfMatched = 0")
     List<MatchingMember> findAllByMemberIdAndIfNotMatched(Member receiver);
 
 // 송신 : 본인 * 읽음 표시 클릭 안 했을 때
