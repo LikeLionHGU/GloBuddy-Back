@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class RequestMatchingResponse extends ApiResponse {
@@ -33,7 +35,7 @@ public class RequestMatchingResponse extends ApiResponse {
 
     private String chatLink;
     private String message;
-
+    private LocalDateTime createdTime;
 
 
     public RequestMatchingResponse(MatchingMemberDto dto){
@@ -49,6 +51,7 @@ public class RequestMatchingResponse extends ApiResponse {
         this.IfMatched = dto.getIfMatched();
         this.chatLink = dto.getChatLink();
         this.message = dto.getMessage();
+        this.createdTime = dto.getCreatedTime();
     }
 
 
