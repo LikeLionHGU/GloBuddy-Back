@@ -41,15 +41,16 @@ public class PostService {
     public List<PostDto> getAllPosts() {
         List<Post> posts = postRepository.findAllByDeletedFalse();
         List<Member> members = memberRepository.findAll();
-         return posts.stream()
+        return posts.stream()
                 .map(postInfo -> {
-                    Needs needs = needsRepository.findAllByPosts(postInfo.getPostId());
-                    MemberDetail detail = memberDetailRepository.findAllByMember(postInfo.getMember().getMemberId());
+                    Needs needs = needsRepository.findByPost(postInfo);
+                    MemberDetail detail = memberDetailRepository.findByMember(postInfo.getMember());
                     return PostDto.from(postInfo,needs,detail);
-                    })
-                    .toList();
-
+                })
+                .toList();
     }
+
+
 
     public List<PostDto> getAllPostsIncludeDeleted() {
         List<Post> posts = postRepository.findAll();

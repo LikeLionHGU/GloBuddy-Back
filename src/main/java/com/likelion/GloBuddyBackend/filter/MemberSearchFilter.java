@@ -9,6 +9,7 @@ public class MemberSearchFilter {
 
     private String gender;
     private String nation;
+
     @Builder
     public MemberSearchFilter( String gender, String nation){
         this.gender = gender;
