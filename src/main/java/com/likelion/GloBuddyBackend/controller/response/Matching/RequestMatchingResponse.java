@@ -23,7 +23,7 @@ public class RequestMatchingResponse extends ApiResponse {
     private String senderNation;
 
     private Long receiverId;
-
+    private String receiverName;
 
 
 
@@ -35,6 +35,7 @@ public class RequestMatchingResponse extends ApiResponse {
     private String message;
 
 
+
     public RequestMatchingResponse(MatchingMemberDto dto){
         this.matchingId= dto.getMatchingId();
         this.senderId = dto.getSenderId();
@@ -43,6 +44,7 @@ public class RequestMatchingResponse extends ApiResponse {
         this.senderGender = dto.getSenderGender();
         this.senderNation = dto.getSenderNation();
         this.receiverId =dto.getReceiverId();
+        this.receiverName = dto.getReceiverName();
         this.IfChecked = dto.isIfChecked();
         this.IfMatched = dto.getIfMatched();
         this.chatLink = dto.getChatLink();

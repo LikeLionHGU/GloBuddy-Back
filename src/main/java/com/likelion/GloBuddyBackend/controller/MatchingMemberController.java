@@ -73,7 +73,7 @@ public class MatchingMemberController {
     public ResponseEntity<ApiResponse> getSentMail(@PathVariable Long memberId) {
         List<MatchingMemberDto> matchingList = matchingService.getAllsentMail(memberId);
 
-        ApiResponse response = new MailListResponse(matchingList);
+        ApiResponse response = new RequestMatchingListResponse(matchingList);
 
         return ResponseEntity.ok(response);
     }
